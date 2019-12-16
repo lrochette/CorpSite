@@ -55,7 +55,10 @@
                                          <li>
                                             <a href="#">Austin, TX</a>
                                         </li>
-                                   </ul>
+                                         <li>
+                                            <a href="#">Paris, France</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
