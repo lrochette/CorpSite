@@ -53,10 +53,7 @@
                                             <a href="#">Secret Mountain</a>
                                         </li>
                                          <li>
-                                            <a href="#">Austin, Texas</a>
-                                        </li>
-                                         <li>
-                                            <a href="#">Paris, France</a>
+                                            <a href="#">Paris, Texas</a>
                                         </li>
                                     </ul>
                                 </li>
