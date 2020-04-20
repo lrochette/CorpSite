@@ -79,7 +79,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                snDevOpsStep(enabled: true, ignoreErrors: true)()
+                snDevOpsStep(enabled: true, ignoreErrors: true)
                 snDevOpsChange()
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
