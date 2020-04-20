@@ -1,14 +1,14 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Jenkins Maven' 
+    tools {
+        maven 'Jenkins Maven'
     }
     stages {
         stage('CI') {
             steps {
-                snDevOpsStep 
+                snDevOpsStep
                 sh '''
-                    export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
+                    export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
                     mvn --version
                 '''
@@ -17,15 +17,15 @@ pipeline {
             }
             post {
                 success {
-                    junit '**/target/surefire-reports/*.xml' 
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
         stage('UAT deploy') {
             steps {
-                snDevOpsStep 
+                snDevOpsStep
                 sh '''
-                    export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
+                    export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
                     mvn --version
                 '''
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 snDevOpsStep
                 sh '''
-                    export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
+                    export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
                     mvn --version
                 '''
@@ -62,13 +62,13 @@ pipeline {
             }
             post {
                 success {
-                    junit '**/target/surefire-reports/*.xml' 
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
-        
+
             steps {
                 sh '''
-                    export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
+                    export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
                     mvn --version
                 '''
