@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('CI') {
             steps {
-                snDevOpsStep
+                snDevOpsStep(enabled: true, ignoreError: true)
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('UAT deploy') {
             steps {
-                snDevOpsStep
+                snDevOpsStep(enabled: true, ignoreError: true)
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -51,7 +51,7 @@ pipeline {
         }
         stage('UAT test') {
             steps {
-                snDevOpsStep
+                snDevOpsStep(enabled: true, ignoreError: true)
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -88,7 +88,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                snDevOpsStep()
+                snDevOpsStep(enabled: true, ignoreError: true)()
                 snDevOpsChange()
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
