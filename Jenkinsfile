@@ -59,20 +59,6 @@ pipeline {
                 '''
                 sh 'mvn compile'
                 sh 'mvn verify'
-            }
-            post {
-                success {
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
-
-            steps {
-                sh '''
-                    export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
-                    export PATH=$PATH:$M2_HOME/bin
-                    mvn --version
-                '''
-                sh 'mvn compile'
                 /*
                 sh '''
                     mvn sonar:sonar \
@@ -84,6 +70,11 @@ pipeline {
                     -Dsonar.analysis.buildURL=$BUILD_URL
                 '''
                 */
+            }
+            post {
+                success {
+                    junit '**/target/surefire-reports/*.xml'
+                }
             }
         }
         stage('deploy') {
