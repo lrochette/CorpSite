@@ -30,7 +30,7 @@ pipeline {
                     mvn --version
                 '''
                 sh 'mvn package'
-                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-web.jar", "version": "1.0.$BUILDNUMBER","semanticVersion": "1.0.$BUILDNUMBER","repositoryName": "globex"}]}""")
+                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-web.jar", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "globex"}]}""")
 
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
