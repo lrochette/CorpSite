@@ -80,6 +80,8 @@ pipeline {
         stage('deploy') {
             steps {
                 snDevOpsStep()
+                snDevOpsPackage(name: "Globex-package", artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
+
                 snDevOpsChange()
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
