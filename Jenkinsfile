@@ -27,10 +27,9 @@ pipeline {
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
-                    mvn --version
+                    mvn package
                 '''
-                sh 'mvn package'
-                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-web.jar", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "globex"}]}""")
+                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
 
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
