@@ -53,7 +53,7 @@
                                             <a href="#">Secret Mountain</a>
                                         </li>
                                          <li>
-                                            <a href="#">Austin, Tx</a>
+                                            <a href="#">Hays County, Tx</a>
                                         </li>
                                     </ul>
                                 </li>
