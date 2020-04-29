@@ -16,6 +16,17 @@
           <param name="userSettingsSelection" value="userSettingsSelection:default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_2" name="UAT Deploy" type="ssh-deploy-runner">
+        <parameters>
+          <param name="jetbrains.buildServer.deployer.sourcePath" value="target/globex-web.war" />
+          <param name="jetbrains.buildServer.deployer.ssh.transport" value="jetbrains.buildServer.deployer.ssh.transport.scp" />
+          <param name="jetbrains.buildServer.deployer.targetUrl" value="18.189.208.32:/opt/tomcat/webapps" />
+          <param name="jetbrains.buildServer.deployer.username" value="ec2-user" />
+          <param name="jetbrains.buildServer.sshexec.authMethod" value="UPLOADED_KEY" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcitySshKey" value="Ohio-LR.pem" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="CorpSite_HttpsGithubComLrochetteCorpSiteGitRefsHeadsMaster" />
