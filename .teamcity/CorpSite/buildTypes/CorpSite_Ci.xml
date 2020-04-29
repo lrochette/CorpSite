@@ -43,7 +43,7 @@
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="CorpSite_HttpsGithubComLrochetteCorpSiteGitRefsHeadsMaster" />
+      <vcs-entry-ref root-id="CorpSite_HttpsGithubComLrochetteTeamCityGitRefsHeadsMaster" />
     </vcs-settings>
     <requirements />
     <build-triggers>

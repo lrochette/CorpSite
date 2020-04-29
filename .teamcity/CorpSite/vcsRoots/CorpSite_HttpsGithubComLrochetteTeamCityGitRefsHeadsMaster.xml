@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ef179611-6692-42f8-a4f5-810fd6ac751c" type="jetbrains.git" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2018.1/project-config.xsd">
-  <name>https://github.com/lrochette/CorpSite.git#refs/heads/master</name>
+  <name>https://github.com/lrochette/TeamCity.git#refs/heads/master</name>
   <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
   <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
   <param name="authMethod" value="PASSWORD" />
