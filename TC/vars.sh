@@ -5,3 +5,6 @@ export URLSTEPMAP="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops
 export URLNOTIF="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/tool/orchestration"
 export URLCC="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orchestration/changeControl"
 export SNUSER='devops.integration.user'
+
+export CI_JOB_STAGE="Build"
+export ORCHESTRATION_TASK_URL="http://teamcity:8111/viewType.html?buildTypeId=CorpSite_Ci"
