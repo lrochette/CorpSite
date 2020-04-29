@@ -10,7 +10,7 @@
         <param name="buildSettings" value="PREFER_VCS" />
         <param name="credentialsStorageType" value="credentialsJSON" />
         <param name="enabled" value="true" />
-        <param name="rootId" value="CorpSite_HttpsGithubComLrochetteCorpSiteGitRefsHeadsMaster" />
+        <param name="rootId" value="CorpSite_HttpsGithubComLrochetteTeamCityGitRefsHeadsMaster" />
         <param name="showChanges" value="false" />
       </parameters>
     </extension>
