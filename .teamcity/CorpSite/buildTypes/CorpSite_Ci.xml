@@ -5,7 +5,7 @@
   <settings>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_3" name="" type="simpleRunner">
+      <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
         <parameters>
           <param name="command.executable" value="step.sh" />
           <param name="script.content"><![CDATA[export INSTANCENAME='lrochette1'
