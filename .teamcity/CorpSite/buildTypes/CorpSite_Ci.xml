@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="539c0cc2-0e95-44dd-9d46-b8170338b092" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2018.1/project-config.xsd">
   <name>CI</name>
-  <description />
+  <description>CI Build for TeamCity pipeline</description>
   <settings>
+    <options>
+      <option name="publishArtifactCondition" value="SUCCESSFUL" />
+    </options>
     <parameters />
     <build-runners>
       <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
