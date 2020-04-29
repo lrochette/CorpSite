@@ -5,6 +5,20 @@
   <settings>
     <parameters />
     <build-runners>
+      <runner id="RUNNER_3" name="" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="step.sh" />
+          <param name="script.content"><![CDATA[export INSTANCENAME='lrochette1'
+  export TOOLID='e6ae5961db2d0850e1155c55dc9619ed'
+
+  export URLSTEPMAP="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orchestration/stepMapping"
+  export URLNOTIF="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/tool/orchestration"
+  export URLCC="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orchestration/changeControl"
+  export SNUSER='devops.integration.user'
+  #export ORCHESTRATION_TASK_URL: $CI_PROJECT_URL/pipelines]]></param>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_1" name="" type="Maven2">
         <parameters>
           <param name="goals" value="clean compile verify" />
@@ -25,20 +39,6 @@
           <param name="jetbrains.buildServer.sshexec.authMethod" value="UPLOADED_KEY" />
           <param name="teamcity.step.mode" value="default" />
           <param name="teamcitySshKey" value="Ohio-LR.pem" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_3" name="" type="simpleRunner">
-        <parameters>
-          <param name="command.executable" value="step.sh" />
-          <param name="script.content"><![CDATA[export INSTANCENAME='lrochette1'
-  export TOOLID='e6ae5961db2d0850e1155c55dc9619ed'
-
-  export URLSTEPMAP="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orchestration/stepMapping"
-  export URLNOTIF="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/tool/orchestration"
-  export URLCC="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orchestration/changeControl"
-  export SNUSER='devops.integration.user'
-  #export ORCHESTRATION_TASK_URL: $CI_PROJECT_URL/pipelines]]></param>
-          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
     </build-runners>
