@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="da6dca35-1ae3-40a9-952b-3a139b72388b" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2018.1/project-config.xsd">
   <name>CorpSite</name>
-  <parameters />
+  <parameters>
+    <param name="env.SNPWD" value="avanisN1" />
+  </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_2" type="versionedSettings">
       <parameters>
