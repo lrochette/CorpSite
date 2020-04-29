@@ -1,6 +1,8 @@
-
-
-ps
-whoami
+#!/bin/bash
+echo "Starting Step registration"
+echo $SHELL
 pwd
-. TC/vars.sh
+source TC/vars.sh
+
+echo "Environment variable read"
+env
