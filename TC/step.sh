@@ -1,4 +1,6 @@
-source vars.#!/bin/sh
+
 
 ps
 whoami
+pwd
+. TC/vars.sh
