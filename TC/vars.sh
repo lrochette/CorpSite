@@ -7,4 +7,4 @@ export URLCC="https://$INSTANCENAME.service-now.com/api/sn_devops/v1/devops/orch
 export SNUSER='devops.integration.user'
 
 export CI_JOB_STAGE="Build"
-export ORCHESTRATION_TASK_URL="http://teamcity:8111/viewType.html?buildTypeId=CorpSite_Ci"
+export ORCHESTRATION_TASK_URL="http://teamcity:8111/viewType.html?buildTypeId=CorpSiteTC_Ci"
