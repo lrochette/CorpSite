@@ -8,6 +8,7 @@
     </options>
     <parameters>
       <param name="env.CI_BRANCH" value="%teamcity.build.branch%" />
+      <param name="env.SNPWD" value="avanisN1" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
