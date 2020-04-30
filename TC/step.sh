@@ -6,6 +6,8 @@ env
 
 echo "TC: Starting Step registration"
 
+export CI_BRANCH="master"
+
 echo "Mapping for stage $CI_JOB_STAGE"
 export BODY="{\"branchName\":\"${CI_BRANCH}\","
 BODY+="\"orchestrationTaskName\":\"${TEAMCITY_PROJECT_NAME}#$CI_JOB_STAGE\","
