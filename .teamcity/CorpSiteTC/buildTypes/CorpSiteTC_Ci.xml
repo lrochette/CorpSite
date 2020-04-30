@@ -44,6 +44,12 @@
           <param name="teamcitySshKey" value="Ohio-LR.pem" />
         </parameters>
       </runner>
+      <runner id="RUNNER_4" name="Complete Stage" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="TC/end_stage.sh" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="CorpSite_HttpsGithubComLrochetteTeamCityGitRefsHeadsMaster" />
