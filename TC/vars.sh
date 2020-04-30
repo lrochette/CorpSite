@@ -34,7 +34,7 @@ function start_stage() {
   curl -X POST -u ${SNUSER}:$SNPWD -H "Content-Type:application/json" "$URLNOTIF?toolId=$TOOLID&toolType=GitLab" --data "$BODY"
 }
 
-fcuntion end_stage() {
+function end_stage() {
   echo "Notification COMPLETED"
   export BODY="{\"toolId\":\"$TOOLID\",\"buildNumber\":\"$CI_PIPELINE_ID\","
   BODY+="\"nativeId\":\"${CI_PROJECT_NAME}/${CI_JOB_STAGE}#$CI_CONCURRENT_ID\",\"name\":\"${CI_PROJECT_NAME}/${CI_JOB_STAGE}\","
