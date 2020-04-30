@@ -6,7 +6,9 @@
     <options>
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
-    <parameters />
+    <parameters>
+      <param name="env.CI_BRANCH" value="%teamcity.build.branch%" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
         <parameters>
