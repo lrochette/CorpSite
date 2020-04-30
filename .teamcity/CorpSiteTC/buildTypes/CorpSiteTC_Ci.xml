@@ -8,6 +8,7 @@
     </options>
     <parameters>
       <param name="env.BUILDID" value="%teamcity.build.id%" />
+      <param name="env.PIPELINENAME" value="%system.teamcity.buildType.id%" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_3" name="Start Stage" type="simpleRunner">
