@@ -6,9 +6,7 @@
     <options>
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
-    <parameters>
-      <param name="env.SNPWD" value="avanisN1" />
-    </parameters>
+    <parameters />
     <build-runners>
       <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
         <parameters>
