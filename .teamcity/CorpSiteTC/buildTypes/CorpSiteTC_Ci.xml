@@ -6,7 +6,9 @@
     <options>
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
-    <parameters />
+    <parameters>
+      <param name="env.BUILDID" value="%teamcity.build.id%" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_3" name="Start Stage" type="simpleRunner">
         <parameters>
