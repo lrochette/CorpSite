@@ -8,9 +8,9 @@
     </options>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_3" name="SN-Register Build Step" type="simpleRunner">
+      <runner id="RUNNER_3" name="Start Stage" type="simpleRunner">
         <parameters>
-          <param name="command.executable" value="TC/step.sh" />
+          <param name="command.executable" value="TC/start_stage.sh" />
           <param name="script.content"><![CDATA[export INSTANCENAME='lrochette1'
   export TOOLID='e6ae5961db2d0850e1155c55dc9619ed'
 
