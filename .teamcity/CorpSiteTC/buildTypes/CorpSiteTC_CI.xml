@@ -7,6 +7,7 @@
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <disabled-settings>
+      <setting-ref ref="RUNNER_2" />
       <setting-ref ref="RUNNER_3" />
       <setting-ref ref="RUNNER_4" />
     </disabled-settings>
