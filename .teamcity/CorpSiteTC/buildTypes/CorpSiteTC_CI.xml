@@ -6,6 +6,9 @@
     <options>
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_3" />
+    </disabled-settings>
     <parameters>
       <param name="env.BUILDID" value="%teamcity.build.id%" />
       <param name="env.PIPELINENAME" value="%system.teamcity.buildType.id%" />
