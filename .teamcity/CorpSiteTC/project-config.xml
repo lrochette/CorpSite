@@ -3,7 +3,7 @@
   <name>CorpSiteTC</name>
   <description>TeamCity implementation of CorpSite</description>
   <parameters>
-    <param name="env.SNPWD" value="avanisN1" />
+    <param name="env.SNPWD" value="credentialsJSON:7c32bdbc-59e3-4d83-8374-e9b76f5af38d" />
   </parameters>
   <project-extensions>
     <extension id="PROJECT_EXT_2" type="versionedSettings">
