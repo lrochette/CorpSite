@@ -4,5 +4,6 @@
   <description>Goobal multi stage pipeline</description>
   <parameters />
   <cleanup />
+  <buildTypesOrder order="CorpSiteTC_Pipeline_Build,CorpSiteTC_Pipeline_UAT,CorpSiteTC_Pipeline_Prod" />
 </project>
 
