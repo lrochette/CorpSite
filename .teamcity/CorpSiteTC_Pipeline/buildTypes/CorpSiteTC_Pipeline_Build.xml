@@ -4,7 +4,7 @@
   <description>Buils stage</description>
   <settings>
     <options>
-      <option name="artifactRules" value="*.war =&gt; target" />
+      <option name="artifactRules" value="target/globex-web.war" />
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <parameters />
