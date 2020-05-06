@@ -4,6 +4,7 @@
   <description>CI Build for TeamCity pipeline</description>
   <settings>
     <options>
+      <option name="artifactRules" value="*.war =&gt; target" />
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <disabled-settings>
