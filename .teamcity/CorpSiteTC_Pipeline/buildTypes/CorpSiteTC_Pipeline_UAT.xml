@@ -24,7 +24,15 @@
     </build-runners>
     <vcs-settings />
     <requirements />
-    <build-triggers />
+    <build-triggers>
+      <build-trigger id="TRIGGER_1" type="buildDependencyTrigger">
+        <parameters>
+          <param name="afterSuccessfulBuildOnly" value="true" />
+          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="dependsOn" value="CorpSiteTC_Pipeline_Build" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_1" sourceBuildTypeId="CorpSiteTC_Pipeline_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
