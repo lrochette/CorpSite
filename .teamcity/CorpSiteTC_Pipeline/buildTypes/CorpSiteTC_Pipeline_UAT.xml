@@ -33,12 +33,6 @@
         </parameters>
       </build-trigger>
     </build-triggers>
-    <artifact-dependencies>
-      <dependency id="ARTIFACT_DEPENDENCY_1" sourceBuildTypeId="CorpSiteTC_Pipeline_Build" cleanDestination="false">
-        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
-        <artifact sourcePath="+:globex-web.war =&gt; target/globex-web.war" />
-      </dependency>
-    </artifact-dependencies>
     <cleanup />
   </settings>
 </build-type>
