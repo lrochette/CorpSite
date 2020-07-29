@@ -29,7 +29,7 @@ pipeline {
                     export PATH=$PATH:$M2_HOME/bin
                     mvn package
                 '''
-                // snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
+                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
 
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
@@ -80,7 +80,7 @@ pipeline {
         stage('deploy') {
             steps {
                 snDevOpsStep()
-                // snDevOpsPackage(name: "Globex-package", artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
+                snDevOpsPackage(name: "Globex-package", artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
 
                 snDevOpsChange()
                 script {
