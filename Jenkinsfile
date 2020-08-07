@@ -1,3 +1,8 @@
+def repoName = "amex-repo"
+def pkgName  = "amex-pkg"
+def artName  = "amex-war"
+def artVersion = "1.2.$BUILD_NUMBER"
+
 pipeline {
     agent any
     tools {
@@ -29,7 +34,7 @@ pipeline {
                     export PATH=$PATH:$M2_HOME/bin
                     mvn package
                 '''
-                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","semanticVersion": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
+                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "$artname", "version": "$artVersion","semanticVersion": "$artVersion","repositoryName": "$repoName"}]}""")
 
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
@@ -80,7 +85,7 @@ pipeline {
         stage('deploy') {
             steps {
                 snDevOpsStep()
-                snDevOpsPackage(name: "Globex-package", artifactsPayload: """{"artifacts": [{"name": "globex-jk.war", "version": "1.0.$BUILD_NUMBER","repositoryName": "CorpSite-jenkins"}]}""")
+                snDevOpsPackage(name: "$pkgName", artifactsPayload: """{"artifacts": [{"name": "$artname", "version": "$artVersion","repositoryName": "$repoName"}]}""")
 
                 snDevOpsChange()
                 script {
