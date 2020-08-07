@@ -34,7 +34,7 @@ pipeline {
                     export PATH=$PATH:$M2_HOME/bin
                     mvn package
                 '''
-                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "$$artName", "version": "$artVersion","semanticVersion": "$artVersion","repositoryName": "$repoName"}]}""")
+                snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "$artName", "version": "$artVersion","semanticVersion": "$artVersion","repositoryName": "$repoName"}]}""")
 
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
@@ -85,7 +85,7 @@ pipeline {
         stage('deploy') {
             steps {
                 snDevOpsStep()
-                snDevOpsPackage(name: "$pkgName", artifactsPayload: """{"artifacts": [{"name": "$$artName", "version": "$artVersion","repositoryName": "$repoName"}]}""")
+                snDevOpsPackage(name: "$pkgName", artifactsPayload: """{"artifacts": [{"name": "$artName", "version": "$artVersion","repositoryName": "$repoName"}]}""")
 
                 snDevOpsChange()
                 script {
