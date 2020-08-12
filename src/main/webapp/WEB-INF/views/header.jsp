@@ -53,7 +53,7 @@
                                             <a href="#">Phoenix, AZ</a>
                                         </li>
                                          <li>
-                                            <a href="#">Houston, County, Tx</a>
+                                            <a href="#">Austin, Tx</a>
                                         </li>
                                     </ul>
                                 </li>
