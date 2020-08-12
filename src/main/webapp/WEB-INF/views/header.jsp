@@ -50,7 +50,7 @@
                                             <a href="#">Paris, TX</a>
                                         </li>
                                         <li>
-                                            <a href="#">Lilles, France</a>
+                                            <a href="#">Austin, TX</a>
                                         </li>
                                          <li>
                                             <a href="#">Marseilles, France</a>
