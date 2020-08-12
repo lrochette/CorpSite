@@ -50,7 +50,7 @@
                                             <a href="#">San Jose, ca</a>
                                         </li>
                                         <li>
-                                            <a href="#">Paris, France</a>
+                                            <a href="#">Lilles, France</a>
                                         </li>
                                          <li>
                                             <a href="#">Austin, Tx</a>
