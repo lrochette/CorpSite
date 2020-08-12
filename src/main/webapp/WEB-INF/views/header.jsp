@@ -53,7 +53,7 @@
                                             <a href="#">Lilles, France</a>
                                         </li>
                                          <li>
-                                            <a href="#">Austin, Tx</a>
+                                            <a href="#">Marseilles, France</a>
                                         </li>
                                     </ul>
                                 </li>
