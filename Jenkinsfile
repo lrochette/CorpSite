@@ -1,5 +1,5 @@
 def repoName = "amex-repo"
-def pkgName  = "amex-pkg"
+def pkgName  = "amex-pkg-$BUILD_NUMBER"
 def artName  = "amex-war"
 def artVersion = "1.2.$BUILD_NUMBER"
 
