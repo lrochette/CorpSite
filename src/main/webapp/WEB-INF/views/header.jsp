@@ -50,7 +50,7 @@
                                             <a href="#">Tucson, AZ</a>
                                         </li>
                                         <li>
-                                            <a href="#">Austin, TX</a>
+                                            <a href="#">Phoenix, AZ</a>
                                         </li>
                                          <li>
                                             <a href="#">Houston, TX</a>
