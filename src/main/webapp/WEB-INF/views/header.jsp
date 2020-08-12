@@ -53,7 +53,7 @@
                                             <a href="#">Austin, TX</a>
                                         </li>
                                          <li>
-                                            <a href="#">Marseilles, France</a>
+                                            <a href="#">Houston, TX</a>
                                         </li>
                                     </ul>
                                 </li>
