@@ -47,7 +47,7 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="#">San Jose, ca</a>
+                                            <a href="#">Paris, France</a>
                                         </li>
                                         <li>
                                             <a href="#">Lilles, France</a>
