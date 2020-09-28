@@ -26,6 +26,24 @@ pipeline {
                 }
             }
         }
+        stage('Validate Config') {
+          steps {
+            snDevOpsStep(enabled:true)
+            SWEAGLEValidate(
+              actionName: 'Validate Config Files',
+              mdsName: 'Globex-PRD',
+              stored: false,
+              warnMax: -1,
+              errMax: 0,
+              markFailed: false,
+              showResults: false,
+              retryCount: 5,
+              retryInterval: 30
+            )
+            junit 'sweagle-validation.xml'
+          }
+        }
+        
         stage('UAT deploy') {
             steps {
                 snDevOpsStep()
