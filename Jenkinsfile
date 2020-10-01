@@ -31,7 +31,7 @@ pipeline {
             snDevOpsStep(enabled:true)
             SWEAGLEValidate(
               actionName: 'Validate Config Files',
-              mdsName: 'Globex-PRD',
+              mdsName: 'Globex Prod Web Service',
               stored: false,
               warnMax: -1,
               errMax: 0,
@@ -43,7 +43,7 @@ pipeline {
             junit 'sweagle-validation.xml'
           }
         }
-        
+
         stage('UAT deploy') {
             steps {
                 snDevOpsStep()
