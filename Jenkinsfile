@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('CI') {
             steps {
-                snDevOpsStep()
+                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -46,7 +46,7 @@ pipeline {
 
         stage('UAT deploy') {
             steps {
-                snDevOpsStep()
+                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -74,7 +74,7 @@ pipeline {
         }
         stage('UAT test') {
             steps {
-                snDevOpsStep()
+                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -102,7 +102,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                snDevOpsStep()
+                // snDevOpsStep()
                 snDevOpsPackage(name: "$pkgName", artifactsPayload: """{"artifacts": [{"name": "$artName", "version": "$artVersion","repositoryName": "$repoName"}]}""")
 
                 snDevOpsChange()
