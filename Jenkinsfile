@@ -122,6 +122,7 @@ pipeline {
                         )
                     ])
                 }
+                error "Failing on purpose"
             }
         }
     }
