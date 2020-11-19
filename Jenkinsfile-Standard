@@ -2,7 +2,7 @@ def company  = "std"
 def repoName = "$company-repo"
 def pkgName  = "$company-pkg-$BUILD_NUMBER"
 def artName  = "$company-war"
-  def artVersion = "3.3.$BUILD_NUMBER"
+  def artVersion = "5.5.$BUILD_NUMBER"
 
 pipeline {
     agent any
@@ -12,7 +12,6 @@ pipeline {
     stages {
         stage('CI') {
             steps {
-                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -27,9 +26,9 @@ pipeline {
                 }
             }
         }
+/*
         stage('Validate Config') {
           steps {
-            // snDevOpsStep(enabled:true)
             SWEAGLEValidate(
               actionName: 'Validate Config Files',
               mdsName: 'Globex Prod Web Service',
@@ -44,10 +43,9 @@ pipeline {
             junit 'sweagle-validation.xml'
           }
         }
-
+*/
         stage('UAT deploy') {
             steps {
-                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -73,9 +71,9 @@ pipeline {
                 }
             }
         }
+/*
         stage('UAT test') {
             steps {
-                // snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Maven home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -83,17 +81,6 @@ pipeline {
                 '''
                 sh 'mvn compile'
                 sh 'mvn verify'
-                /*
-                sh '''
-                    mvn sonar:sonar \
-                    -Dsonar.projectKey=CorpSite \
-                    -Dsonar.host.url=http://sonarqube.sndevops.xyz:9000 \
-                    -Dsonar.login=efef5144be738a606c23fff3f139f00965b82869 \
-                    -Dsonar.exclusions=src/main/webapp/resources/js/bootstrap.js \
-                    -Dsonar.analysis.scm=$GIT_COMMIT \
-                    -Dsonar.analysis.buildURL=$BUILD_URL
-                '''
-                */
             }
             post {
                 success {
@@ -101,12 +88,13 @@ pipeline {
                 }
             }
         }
+*/
+
         stage('deploy') {
             steps {
-                // snDevOpsStep()
                 snDevOpsPackage(name: "$pkgName", artifactsPayload: """{"artifacts": [{"name": "$artName", "version": "$artVersion","repositoryName": "$repoName"}]}""")
-
                 snDevOpsChange()
+/*
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
                     publishers: [
@@ -123,6 +111,7 @@ pipeline {
                         )
                     ])
                 }
+*/
             }
         }
     }
