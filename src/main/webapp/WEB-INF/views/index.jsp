@@ -14,8 +14,8 @@
 								<img alt="Logo" class="image-small mb8" src="resources/img/logo-light.png">
 								<h6 class="uppercase mb32" style="font-size: 1.2em;">Not an evil organization.</h6>
 								<p class="text-center mb0">
-									We belive in the power of teams.  We take care of our employees, have fitness rooms 
-									and casual dress, and we don't believe in walls.
+									We belive in the power of teams.  We take care of our employees, have fitness rooms
+									and casual dress, and we don't believe in walls. We are a great company.
 								</p>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 					<div class="col-md-5 col-sm-6 col-md-push-7 col-sm-push-6">
 						<h2>Some of the coolest places to work</h2>
 						<p class="lead mb48 mb-xs-32">
-							Ever want to work inside of a mountain? Yeah we did too.  How else are we supposed to keep our 
+							Ever want to work inside of a mountain? Yeah we did too.  How else are we supposed to keep our
 							cool technologies away from the prying eyes of governments?
 						</p>
 					</div>
