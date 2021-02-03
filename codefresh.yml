@@ -1,0 +1,38 @@
+version: '1.0'
+stages:
+  - clone
+  - build
+  - test
+steps:
+  clone:
+    title: Cloning repository
+    type: git-clone
+    repo: 'https://github.com/codefresh-io/cli/'
+    revision: master
+    stage: clone
+  build_application:
+    title: "Building Gloebx Application"
+    type: build
+    image_name: codefresh-io/cli
+    working_directory: '${{clone}}'
+    tag: latest
+    dockerfile: Dockerfile
+    stage: build
+  test:
+    title: Running test
+    type: freestyle
+    image: codefresh-io/cli
+    working_directory: '${{clone}}'
+    commands:
+      - ls
+    stage: build
+  build_image:
+    title: "Building tomcat container"
+    type: "build"
+    image_name: "lrochette/globex"
+    working_directory: "${{clone}}"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    dockerfile: "Dockerfile"
+    disable_push: true
+    stage: "build"
+        
