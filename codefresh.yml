@@ -11,21 +11,24 @@ steps:
     revision: master
     stage: clone
   build_application:
-    title: "Building Gloebx Application"
-    type: build
-    image_name: codefresh-io/cli
-    working_directory: '${{clone}}'
-    tag: latest
-    dockerfile: Dockerfile
-    stage: build
-  test:
-    title: Running test
-    type: freestyle
-    image: codefresh-io/cli
-    working_directory: '${{clone}}'
+    title: "Building Globex website"
+    type: "freestyle"
+    image: maven:3.3-jdk-8
+    working_directory: "${{clone}}"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
     commands:
-      - ls
-    stage: build
+      - mvn package
+    stage: "build"
+
+  test:
+    title: "Running test"
+    type: "freestyle" # Run any command
+    image: maven:3.3-jdk-8
+    working_directory: "${{clone}}"
+    commands:
+      - mvn test
+    stage: "test"
+    
   build_image:
     title: "Building tomcat container"
     type: "build"
@@ -35,4 +38,3 @@ steps:
     dockerfile: "Dockerfile"
     disable_push: true
     stage: "build"
-        
