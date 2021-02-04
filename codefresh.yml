@@ -4,12 +4,12 @@ stages:
   - build
   - test
   - push
-  
+
 steps:
   clone:
     title: Cloning repository
     type: git-clone
-    repo: 'https://github.com/codefresh-io/cli/'
+    repo: 'https://github.com/lrochette/CorpSite'
     revision: master
     stage: clone
   build_application:
