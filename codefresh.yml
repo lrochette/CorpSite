@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - push
+  - deploy
 
 steps:
   clone:
@@ -48,3 +49,15 @@ steps:
     tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
     registry: docker-lr
     stage: "push"
+
+  DeployToMyCluster:
+    title: deploying to cluster
+    type: deploy
+    stage: deploy
+    kind: kubernetes
+    cluster:  laurent-cluster@codefresh-support
+    namespace: default
+    service: globex
+    candidate:
+      image: lrochette/globex:${{CF_BRANCH_TAG_NORMALIZED}}
+      registry: docker-lr
