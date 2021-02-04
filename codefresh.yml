@@ -12,12 +12,11 @@ steps:
     stage: clone
   build_application:
     title: "Building Globex website"
-    type: "freestyle"
     image: maven:3.3-jdk-8
     working_directory: "${{clone}}"
     tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
     commands:
-      - mvn package
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
     stage: "build"
 
   test:
@@ -26,9 +25,9 @@ steps:
     image: maven:3.3-jdk-8
     working_directory: "${{clone}}"
     commands:
-      - mvn test
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository test
     stage: "test"
-    
+
   build_image:
     title: "Building tomcat container"
     type: "build"
@@ -38,3 +37,12 @@ steps:
     dockerfile: "Dockerfile"
     disable_push: true
     stage: "build"
+
+  push:
+    type: push
+    title: "Pushing globex image"
+    candidate: ${{build_image}}
+    image_name: "lrochette/globex"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    registry: docker-lr
+    stage: "push"
