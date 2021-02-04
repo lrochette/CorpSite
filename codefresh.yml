@@ -3,6 +3,8 @@ stages:
   - clone
   - build
   - test
+  - push
+  
 steps:
   clone:
     title: Cloning repository
