@@ -6,7 +6,35 @@ stages:
   - push
   - deploy
 
+
+# {
+#   "toolId": "${sn_devops_toolId}",
+#   "buildNumber": "${CF_BUILD_ID}",
+#   "nativeId": "HILR/Prod #${CF_BUILD_ID}",
+#   "name": "HILR/Prod",
+#   "id": "HILR/Prod #${CF_BUILD_ID}",
+#   "url": "https://dev.azure.com/lenn/CorpSite-ADO/_build/results?buildId=100#Prod/",
+#   "isMultiBranch": "false",
+#   "orchestrationTaskUrl": "https://dev.azure.com/lenn/CorpSite-ADO/_build?name=HILR#Prod",
+#   "orchestrationTaskName": "CorpSite-ADO/HILR#Prod",
+#   "upstreamTaskUrl": "https://dev.azure.com/lenn/CorpSite-ADO/_build/results?buildId=100#UAT/",
+#   "upstreamId": "CorpSite-ADO/HILR#UAT",
+#   "result": "building",
+#   "startDateTime": "2020-03-20 22:59:27"
+# }
+
+CF_BUILD_URL
+
 steps:
+  sn_stage_start:
+    title: "SN DevOps statrt clone"
+    image: curlimages/curl
+    commands:
+      - |
+        echo "CF_BUILD_URL: ${CF_BUILD_URL}"
+        echo "CF_BUILD_ID: ${CF_BUILD_ID}"
+        curl -X POST --header "Content-Type: application/json" --data '{}' ${sn_devops_user}:${sn_devops_password}@${sn_devops_url}/api/sn_devops/devops/orchestrate?toolId=${sn_devops_toolId}
+
   clone:
     title: Cloning repository
     type: git-clone
