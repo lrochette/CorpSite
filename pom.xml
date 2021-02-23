@@ -7,7 +7,7 @@
     <groupId>com.globex.web</groupId>
     <artifactId>globex-web</artifactId>
     <packaging>war</packaging>
-    <version>1.4</version>
+    <version>1.4-SNAPSHOT</version>
     <name>globex-web</name>
     <url>http://maven.apache.org</url>
 
