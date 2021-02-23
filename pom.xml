@@ -7,7 +7,7 @@
     <groupId>com.globex.web</groupId>
     <artifactId>globex-web</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.4</version>
     <name>globex-web</name>
     <url>http://maven.apache.org</url>
 
@@ -79,34 +79,58 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>1.4</version>
             <scope>provided</scope>
         </dependency>
 
     </dependencies>
     <build>
-        <finalName>globex-web</finalName>
+        <finalName>globex-web-${project.version}.${buildNumber}</finalName>
         <plugins>
-            <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.12.v20180830</version>
-            </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <id>buildnumber</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>create</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <format>{0,number}</format>
+              <items>
+                <item>buildNumber</item>
+              </items>
+              <doCheck>false</doCheck>
+              <doUpdate>false</doUpdate>
+              <revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
+            </configuration>
+          </plugin>
 
-            <!-- Default is too old, update to latest to run the latest Spring 5 + jUnit 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
-            </plugin>
+          <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
+          <plugin>
+              <groupId>org.eclipse.jetty</groupId>
+              <artifactId>jetty-maven-plugin</artifactId>
+              <version>9.4.12.v20180830</version>
+          </plugin>
 
-            <!-- Default 2.2 is too old, update to latest -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
+          <!-- Default is too old, update to latest to run the latest Spring 5 + jUnit 5 -->
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.22.0</version>
+          </plugin>
+
+          <!-- Default 2.2 is too old, update to latest -->
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>3.2.2</version>
+          </plugin>
 
         </plugins>
     </build>
