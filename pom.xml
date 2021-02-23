@@ -111,13 +111,22 @@
 
         </plugins>
     </build>
+
     <distributionManagement>
       <repository>
-        <uniqueVersion>false</uniqueVersion>
-        <id>central</id>
-        <name>Codefresh Test Repository</name>
-        <url>https://https://codefreshdev.jfrog.io/artifactory/somos</url>
-        <layout>default</layout>
+          <id>central</id>
+          <name>a0mcplsfgjiaf-artifactory-primary-0-releases</name>
+          <url>https://codefreshdev.jfrog.io/artifactory/CorpSite</url>
       </repository>
+      <snapshotRepository>
+          <id>snapshots</id>
+          <name>a0mcplsfgjiaf-artifactory-primary-0-snapshots</name>
+          <url>https://codefreshdev.jfrog.io/artifactory/CorpSite</url>
+      </snapshotRepository>
     </distributionManagement>
+    <server>
+      <id>central</id>
+      <username>lrochette</username>
+      <password>AP2ypkRyeXrPfrZtEvz12CP1ue61hiCtrqkeLjoWFqPf9AtJM</password>
+    </server>
 </project>
