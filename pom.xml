@@ -11,6 +11,20 @@
     <name>globex-web</name>
     <url>http://maven.apache.org</url>
 
+    <configuration>
+      <servers>
+        <server>
+          <id>central</id>
+          <username>lrochette</username>
+          <password>AP2ypkRyeXrPfrZtEvz12CP1ue61hiCtrqkeLjoWFqPf9AtJM</password>
+        </server>
+        <server>
+          <id>snapshots</id>
+          <username>lrochette</username>
+          <password>AP2ypkRyeXrPfrZtEvz12CP1ue61hiCtrqkeLjoWFqPf9AtJM</password>
+        </server>
+      </servers>
+    </configuration>
 
     <properties>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
@@ -124,9 +138,5 @@
           <url>https://codefreshdev.jfrog.io/artifactory/CorpSite</url>
       </snapshotRepository>
     </distributionManagement>
-    <server>
-      <id>central</id>
-      <username>lrochette</username>
-      <password>AP2ypkRyeXrPfrZtEvz12CP1ue61hiCtrqkeLjoWFqPf9AtJM</password>
-    </server>
+
 </project>
