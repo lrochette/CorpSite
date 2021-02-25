@@ -131,7 +131,11 @@
               <artifactId>maven-war-plugin</artifactId>
               <version>3.2.2</version>
           </plugin>
-
+          <plugin>
+              <groupId>io.qameta.allure</groupId>
+              <artifactId>allure-maven</artifactId>
+              <version>2.9</version>
+          </plugin>
         </plugins>
     </build>
 
