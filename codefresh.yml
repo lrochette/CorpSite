@@ -23,17 +23,17 @@ stages:
 #   "startDateTime": "2020-03-20 22:59:27"
 # }
 
-{
-  "toolId": "${{sn_devops_toolId}}",
-  "buildNumber": "${CF_BUILD_ID}",
-  "nativeId": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
-  "name": "${{CF_PIPELINE_NAME}}",
-  "id": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
-  "url": "${{CF_PIPELINE_NAME}}",
-  "isMultiBranch": "true",
-  "orchestrationTaskUrl": "${{CF_BUILD_URL}}?step=${{CF_STEP_NAME}}",
-  "orchestrationTaskName": "${{CF_PIPELINE_NAME}}#${{CF_STEP_NAME}}",
-}
+# {
+#   "toolId": "${{sn_devops_toolId}}",
+#   "buildNumber": "${CF_BUILD_ID}",
+#   "nativeId": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
+#   "name": "${{CF_PIPELINE_NAME}}",
+#   "id": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
+#   "url": "${{CF_PIPELINE_NAME}}",
+#   "isMultiBranch": "true",
+#   "orchestrationTaskUrl": "${{CF_BUILD_URL}}?step=${{CF_STEP_NAME}}",
+#   "orchestrationTaskName": "${{CF_PIPELINE_NAME}}#${{CF_STEP_NAME}}",
+# }
 
 steps:
   sn_stage_start:
@@ -43,6 +43,8 @@ steps:
       - |
         echo "CF_BUILD_URL: ${CF_BUILD_URL}"
         echo "CF_BUILD_ID: ${CF_BUILD_ID}"
+        echo "STEP: ${{CF_STEP_NAME}}"
+        echo "STAGE: ${{CF_STAGE_NAME}}"
         curl -X POST --header "Content-Type: application/json" --data '{"toolId":"${{sn_devops_toolId}}","buildNumber":"${CF_BUILD_ID}","nativeId":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","name":"${{CF_PIPELINE_NAME}}","id":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","url":"${{CF_PIPELINE_NAME}}","isMultiBranch":"true","orchestrationTaskUrl":"${{CF_BUILD_URL}}?step=${{CF_STEP_NAME}}","orchestrationTaskName":"${{CF_PIPELINE_NAME}}#${{CF_STEP_NAME}}"}' ${sn_devops_user}:${sn_devops_password}@${sn_devops_url}/api/sn_devops/devops/orchestrate?toolId=${sn_devops_toolId}
 
   clone:
