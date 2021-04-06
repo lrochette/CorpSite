@@ -23,7 +23,6 @@ stages:
 #   "startDateTime": "2020-03-20 22:59:27"
 # }
 
-CF_BUILD_URL
 
 steps:
   sn_stage_start:
