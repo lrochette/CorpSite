@@ -45,9 +45,9 @@ steps:
         echo "CF_BUILD_URL: ${CF_BUILD_URL}"
         echo "CF_BUILD_ID: ${CF_BUILD_ID}"
         echo "CF_STEP: ${CF_STEP_NAME}"
-        echo ""
-        env | grep -i clone
-        env | grep -i stage
+        echo "-------------"
+        env | grep -i clone || true
+        env | grep -i stage || true
         curl -X POST --header "Content-Type: application/json" --data '{"toolId":"${{sn_devops_toolId}}","buildNumber":"${CF_BUILD_ID}","nativeId":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","name":"${{CF_PIPELINE_NAME}}","id":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","url":"${{CF_PIPELINE_NAME}}","isMultiBranch":"true","orchestrationTaskUrl":"${{CF_BUILD_URL}}?step=sn_stage_start","orchestrationTaskName":"${{CF_PIPELINE_NAME}}#sn_stage_start"}' \
         'https://${sn_devops_user}:${sn_devops_password}@${sn_devops_url}/api/sn_devops/devops/orchestration/changeControl?toolId=${sn_devops_toolId}
 
