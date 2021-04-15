@@ -7,7 +7,7 @@
     <groupId>com.globex.web</groupId>
     <artifactId>globex-web</artifactId>
     <packaging>war</packaging>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4.0</version>
     <name>globex-web</name>
     <url>http://maven.apache.org</url>
 
@@ -85,31 +85,8 @@
 
     </dependencies>
     <build>
-        <finalName>globex-web-${project.version}.${buildNumber}</finalName>
+        <finalName>globex-web</finalName>
         <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildnumber-maven-plugin</artifactId>
-            <version>1.4</version>
-            <executions>
-              <execution>
-                <id>buildnumber</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>create</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <format>{0,number}</format>
-              <items>
-                <item>buildNumber</item>
-              </items>
-              <doCheck>false</doCheck>
-              <doUpdate>false</doUpdate>
-              <revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
-            </configuration>
-          </plugin>
 
           <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
           <plugin>
@@ -138,18 +115,5 @@
           </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-      <repository>
-          <id>central</id>
-          <name>a0mcplsfgjiaf-artifactory-primary-0-releases</name>
-          <url>https://codefreshdev.jfrog.io/artifactory/CorpSite</url>
-      </repository>
-      <snapshotRepository>
-          <id>snapshots</id>
-          <name>a0mcplsfgjiaf-artifactory-primary-0-snapshots</name>
-          <url>https://codefreshdev.jfrog.io/artifactory/CorpSite</url>
-      </snapshotRepository>
-    </distributionManagement>
 
 </project>
