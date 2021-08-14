@@ -99,7 +99,7 @@ steps:
     type: deploy
     stage: deploy
     kind: kubernetes
-    cluster:  laurent-cluster@codefresh-support
+    cluster:  laurent.rochette@codefresh.io@onpremlr.us-east-1.eksctl.io
     namespace: default
     service: globex
     candidate:
