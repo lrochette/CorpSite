@@ -61,5 +61,4 @@ steps:
     namespace: demo
     service: globex
     candidate:
-      image: lrochette/globex:${{CF_BRANCH_TAG_NORMALIZED}}
-      registry: docker-lr
+      image: ${{build_image}}
