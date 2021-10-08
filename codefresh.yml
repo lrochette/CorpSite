@@ -7,56 +7,15 @@ stages:
   - deploy
 
 
-# {
-#   "toolId": "${{sn_devops_toolId}}",
-#   "buildNumber": "${CF_BUILD_ID}",
-#   "nativeId": "HILR/Prod #${CF_BUILD_ID}",
-#   "name": "HILR/Prod",
-#   "id": "HILR/Prod #${CF_BUILD_ID}",
-#   "url": "https://dev.azure.com/lenn/CorpSite-ADO/_build/results?buildId=100#Prod/",
-#   "isMultiBranch": "false",
-#   "orchestrationTaskUrl": "https://dev.azure.com/lenn/CorpSite-ADO/_build?name=HILR#Prod",
-#   "orchestrationTaskName": "CorpSite-ADO/HILR#Prod",
-#   "upstreamTaskUrl": "https://dev.azure.com/lenn/CorpSite-ADO/_build/results?buildId=100#UAT/",
-#   "upstreamId": "CorpSite-ADO/HILR#UAT",
-#   "result": "building",
-#   "startDateTime": "2020-03-20 22:59:27"
-# }
-
-# {
-#   "toolId": "${{sn_devops_toolId}}",
-#   "buildNumber": "${CF_BUILD_ID}",
-#   "nativeId": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
-#   "name": "${{CF_PIPELINE_NAME}}",
-#   "id": "${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}",
-#   "url": "${{CF_PIPELINE_NAME}}",
-#   "isMultiBranch": "true",
-#   "orchestrationTaskUrl": "${{CF_BUILD_URL}}?step=sn_stage_start",
-#   "orchestrationTaskName": "${{CF_PIPELINE_NAME}}#sn_stage_start",
-# }
-
 steps:
-  sn_stage_start:
-    title: "SN DevOps start clone"
-    image: curlimages/curl
-    stage: clone
-    commands:
-      - |
-        echo "CF_BUILD_URL: ${CF_BUILD_URL}"
-        echo "CF_BUILD_ID: ${CF_BUILD_ID}"
-        echo "CF_STEP: ${CF_STEP_NAME}"
-        echo "-------------"
-        env | grep -i clone || true
-        env | grep -i stage || true
-        curl -X POST --header "Content-Type: application/json" --data '{"toolId":"${{sn_devops_toolId}}","buildNumber":"${CF_BUILD_ID}","nativeId":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","name":"${{CF_PIPELINE_NAME}}","id":"${{CF_PIPELINE_NAME}} #${CF_BUILD_ID}","url":"${{CF_PIPELINE_NAME}}","isMultiBranch":"true","orchestrationTaskUrl":"${{CF_BUILD_URL}}?step=sn_stage_start","orchestrationTaskName":"${{CF_PIPELINE_NAME}}#sn_stage_start"}' \
-        "https://${{sn_devops_user}}:${{sn_devops_password}}@${{sn_devops_url}}/api/sn_devops/devops/orchestration/changeControl?toolId=${sn_devops_toolId}"
 
   clone:
     title: Cloning repository
     type: git-clone
-    repo: 'https://github.com/lrochette/CorpSite'
-    revision: master
+    repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+    revision: ${{CF_REVISION}}
     stage: clone
+
   build_application:
     title: "Building Globex website"
     image: maven:3.3-jdk-8
@@ -68,7 +27,6 @@ steps:
 
   test:
     title: "Running test"
-    type: "freestyle" # Run any command
     image: maven:3.3-jdk-8
     working_directory: "${{clone}}"
     commands:
@@ -99,8 +57,8 @@ steps:
     type: deploy
     stage: deploy
     kind: kubernetes
-    cluster:  laurent.rochette@codefresh.io@onpremlr.us-east-1.eksctl.io
-    namespace: default
+    cluster:  cf_onprem_eks
+    namespace: demo
     service: globex
     candidate:
       image: lrochette/globex:${{CF_BRANCH_TAG_NORMALIZED}}
