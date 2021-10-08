@@ -62,3 +62,4 @@ steps:
     service: globex
     candidate:
       image: ${{build_image}}
+      registry: docker-lr
