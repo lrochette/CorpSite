@@ -47,6 +47,7 @@ steps:
     title: "Get the image version from the repo"
     image: codefresh/cli
     working_directory: "${{clone}}"
+    stage: "push"
     commands:
       - |
         export VERSION=$(cat version.txt | tr -d '\n')
@@ -71,6 +72,7 @@ steps:
 
   updateVersion:
     title: update the version of the image
+    stage: deploy
     image: codefresh/cli
     working_directory: "${{cloneArgo}}"
     commands:
