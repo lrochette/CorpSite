@@ -52,6 +52,7 @@ steps:
       - |
         export VERSION=$(cat version.txt | tr -d '\n')
         cf_export IMAGE_VERSION=$VERSION
+        cf_export IMAGE=lrochette/globex:$VERSION
 
   push:
     type: push
@@ -66,6 +67,7 @@ steps:
   cloneArgo:
     title: Cloning Gitops repository
     type: git-clone
+    git: github
     repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
     revision: main
     stage: deploy
@@ -76,4 +78,18 @@ steps:
     image: codefresh/cli
     working_directory: "${{cloneArgo}}"
     commands:
-      - yq -i '.spec.containers[0].image=lrochette/globex:env(IMAGE_VERSION)' deployment.yaml
+      - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
+
+  GitCommit:
+    title: Commit new image version to Git
+    type: git-commit
+    arguments:
+      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+      git: github
+      working_directory: "${{cloneArgo}}"
+      commit_message: "update image to ${{IMAGE_VERSION}}"
+      git_user_name: lrochette
+      git_user_email: laurent.rochette@codefresh.io
+      allow_empty: false
+      add:
+        - deployment.yaml
