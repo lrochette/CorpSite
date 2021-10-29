@@ -43,23 +43,35 @@ steps:
     disable_push: true
     stage: "build"
 
+  getVersion:
+    title: "Get the image version from the repo"
+    image: codefresh/cli
+    working_directory: "${{clone}}"
+    commands:
+      - |
+        export VERSION=$(cat version.txt | tr -d '\n')
+        cf_export IMAGE_VERSION=$VERSION
+
   push:
     type: push
     title: "Pushing globex image"
     candidate: ${{build_image}}
     image_name: "lrochette/globex"
-    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    tag: ${{IMAGE_VERSION}}
     registry: docker-lr
     stage: "push"
 
-  DeployToMyCluster:
-    title: deploying to cluster
-    type: deploy
+
+  cloneArgo:
+    title: Cloning Gitops repository
+    type: git-clone
+    repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+    revision: main
     stage: deploy
-    kind: kubernetes
-    cluster:  cf_onprem_eks
-    namespace: demo
-    service: globex
-    candidate:
-      image: ${{build_image}}
-      registry: docker-lr
+
+  updateVersion:
+    title: update the version of the image
+    image: codefresh/cli
+    working_directory: "${{cloneArgo}}"
+    commands:
+      - yq -i '.spec.containers[0].image=lrochette/globex:env(IMAGE_VERSION)' deployment.yaml
