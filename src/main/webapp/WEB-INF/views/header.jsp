@@ -50,7 +50,7 @@
                                             <a href="#">Paris, FR</a>
                                         </li>
                                         <li>
-                                            <a href="#">Phoenix, AZ</a>
+                                            <a href="#">Grenoble, FR</a>
                                         </li>
                                          <li>
                                             <a href="#">Tucson, AZ</a>
