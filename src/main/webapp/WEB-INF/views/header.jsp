@@ -50,7 +50,7 @@
                                             <a href="#">Location 1, AZ</a>
                                         </li>
                                         <li>
-                                            <a href="#">Grenoble, FR</a>
+                                            <a href="#">Location 2, FR</a>
                                         </li>
                                          <li>
                                             <a href="#">Tucson, AZ</a>
