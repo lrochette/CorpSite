@@ -47,7 +47,7 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="#">Phoenix, AZ</a>
+                                            <a href="#">Location 1, AZ</a>
                                         </li>
                                         <li>
                                             <a href="#">Grenoble, FR</a>
