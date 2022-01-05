@@ -53,7 +53,7 @@
                                             <a href="#">Location 2, FR</a>
                                         </li>
                                          <li>
-                                            <a href="#">Tucson, AZ</a>
+                                            <a href="#">Location 3, AZ</a>
                                         </li>
                                     </ul>
                                 </li>
