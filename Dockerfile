@@ -1,5 +1,5 @@
 FROM maven:3.3-jdk-8 as build
-mvn package
+RUN mvn package
 
 FROM tomcat:9.0
 
