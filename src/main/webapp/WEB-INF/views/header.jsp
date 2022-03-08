@@ -53,7 +53,7 @@
                                             <a href="#">Paris, FR</a>
                                         </li>
                                          <li>
-                                            <a href="#">Location 3, AZ</a>
+                                            <a href="#">Seattle, WA</a>
                                         </li>
                                     </ul>
                                 </li>
