@@ -82,6 +82,7 @@ steps:
 
   GitCommit:
     title: Commit new image version to Git
+    stage: deploy
     type: git-commit
     arguments:
       repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
