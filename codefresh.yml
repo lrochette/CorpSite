@@ -76,8 +76,9 @@ steps:
     title: update the version of the image
     stage: deploy
     image: codefresh/cli
-    working_directory: "'/codefresh/volume/${{CF_REPO_NAME}}'_gitops"
+    working_directory: "${{CF_REPO_NAME}}_gitops"
     commands:
+      - ls
       - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
 
   GitCommit:
