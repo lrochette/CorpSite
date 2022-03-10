@@ -88,7 +88,7 @@ steps:
     arguments:
       repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
       git: github
-      working_directory: "${{cloneArgo}}"
+      working_directory: "/codefresh/volume/${{CF_REPO_NAME}}_gitops"
       commit_message: "update image to ${{IMAGE_VERSION}}"
       git_user_name: lrochette
       git_user_email: laurent.rochette@codefresh.io
