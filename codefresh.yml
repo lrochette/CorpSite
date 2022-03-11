@@ -92,6 +92,6 @@ steps:
       commit_message: "update image to ${{IMAGE_VERSION}}"
       git_user_name: lrochette
       git_user_email: laurent.rochette@codefresh.io
-      allow_empty: false
+      allow_empty: true
       add:
         - deployment.yaml
