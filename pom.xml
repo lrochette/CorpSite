@@ -5,10 +5,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.globex.web</groupId>
-    <artifactId>globex-web</artifactId>
+    <artifactId>globex</artifactId>
     <packaging>war</packaging>
     <version>1.4.0</version>
-    <name>globex-web</name>
+    <name>globex</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -85,7 +85,7 @@
 
     </dependencies>
     <build>
-        <finalName>globex-web</finalName>
+        <finalName>globex</finalName>
         <plugins>
 
           <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
