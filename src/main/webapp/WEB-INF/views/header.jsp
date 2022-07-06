@@ -50,7 +50,7 @@
                                             <a href="#">Tucson, AZ</a>
                                         </li>
                                         <li>
-                                            <a href="#">Salt Lake City, UT</a>
+                                            <a href="#">Phoenix, AZ</a>
                                         </li>
                                          <li>
                                             <a href="#">Mesa, AZ</a>
