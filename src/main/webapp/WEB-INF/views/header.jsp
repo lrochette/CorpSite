@@ -53,7 +53,7 @@
                                             <a href="#">Phoenix, AZ</a>
                                         </li>
                                          <li>
-                                            <a href="#">Mesa, AZ</a>
+                                            <a href="#">Paris, FR</a>
                                         </li>
                                     </ul>
                                 </li>
