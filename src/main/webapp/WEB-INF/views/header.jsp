@@ -50,7 +50,7 @@
                                             <a href="#">Location1, XX</a>
                                         </li>
                                         <li>
-                                            <a href="#">Paris, FR</a>
+                                            <a href="#">Location 2, YY</a>
                                         </li>
                                          <li>
                                             <a href="#">Merlbourne, AU</a>
