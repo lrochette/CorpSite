@@ -53,7 +53,7 @@
                                             <a href="#">Tucson, AZ</a>
                                         </li>
                                          <li>
-                                            <a href="#">Location 3, ZZ</a>
+                                            <a href="#">Phoenix, AZ</a>
                                         </li>
                                     </ul>
                                 </li>
