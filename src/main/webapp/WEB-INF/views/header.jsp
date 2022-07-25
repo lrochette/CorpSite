@@ -47,7 +47,7 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="#">Location1, XX</a>
+                                            <a href="#">Paris, FR</a>
                                         </li>
                                         <li>
                                             <a href="#">Location 2, YY</a>
