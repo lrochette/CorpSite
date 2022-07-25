@@ -50,7 +50,7 @@
                                             <a href="#">Paris, FR</a>
                                         </li>
                                         <li>
-                                            <a href="#">Location 2, YY</a>
+                                            <a href="#">Tucson, AZ</a>
                                         </li>
                                          <li>
                                             <a href="#">Location 3, ZZ</a>
