@@ -47,7 +47,7 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="#">Phoenix</a>
+                                            <a href="#">Dallas</a>
                                         </li>
                                         <li>
                                             <a href="#">Tucson, AZ</a>
