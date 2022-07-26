@@ -50,7 +50,7 @@
                                             <a href="#">Dallas</a>
                                         </li>
                                         <li>
-                                            <a href="#">Tucson, AZ</a>
+                                            <a href="#">Austin</a>
                                         </li>
                                          <li>
                                             <a href="#">SLC</a>
