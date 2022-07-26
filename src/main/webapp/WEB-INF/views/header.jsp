@@ -50,7 +50,7 @@
                                             <a href="#">Toulon, FR</a>
                                         </li>
                                         <li>
-                                            <a href="#">Sedona, AZ</a>
+                                            <a href="#">Tucson, AZ</a>
                                         </li>
                                          <li>
                                             <a href="#">Portland</a>
