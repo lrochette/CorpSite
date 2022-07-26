@@ -53,7 +53,7 @@
                                             <a href="#">Sedona, AZ</a>
                                         </li>
                                          <li>
-                                            <a href="#">Phoenix, AZ</a>
+                                            <a href="#">Portland</a>
                                         </li>
                                     </ul>
                                 </li>
