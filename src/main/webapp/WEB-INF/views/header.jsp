@@ -47,10 +47,10 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="#">Paris, FR</a>
+                                            <a href="#">Toulon, FR</a>
                                         </li>
                                         <li>
-                                            <a href="#">Tucson, AZ</a>
+                                            <a href="#">Sedona, AZ</a>
                                         </li>
                                          <li>
                                             <a href="#">Phoenix, AZ</a>
