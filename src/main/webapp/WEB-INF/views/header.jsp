@@ -53,7 +53,7 @@
                                             <a href="#">Tucson, AZ</a>
                                         </li>
                                          <li>
-                                            <a href="#">Portland</a>
+                                            <a href="#">SLC</a>
                                         </li>
                                     </ul>
                                 </li>
