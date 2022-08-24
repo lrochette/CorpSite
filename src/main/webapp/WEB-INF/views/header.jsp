@@ -32,29 +32,18 @@
                     <div class="module-group right">
                         <div class="module left">
                             <ul class="menu">
-                                <li>
-                                    <a href="/">Home</a>
-                                </li>
-                                <li>
-                                    <a href="/about">About</a>
-                                </li>
-                                <li>
-                                    <a href="/jobs">Jobs</a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Locations
-                                    </a>
+                                <li><a href="/globex">Home</a></li>
+                                <li><a href="#">About</a>
                                     <ul>
-                                        <li>
-                                            <a href="#">Dallas</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Austin</a>
-                                        </li>
-                                         <li>
-                                            <a href="#">Houston</a>
-                                        </li>
+                                      <li> Version: 1.7.2</li>
+                                    </ul>
+                                </li>
+                                <li><a href="/jobs">Jobs</a></li>
+                                <li><a href="#">Locations</a>
+                                    <ul>
+                                        <li><a href="#">Dallas</a></li>
+                                        <li><a href="#">Austin</a></li>
+                                         <li><a href="#">Houston</a></li>
                                     </ul>
                                 </li>
                             </ul>
