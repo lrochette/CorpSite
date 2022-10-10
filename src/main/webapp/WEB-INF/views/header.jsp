@@ -42,7 +42,7 @@
                                 <li><a href="#">Locations</a>
                                     <ul>
                                         <li><a href="#">Paris</a></li>
-                                        <li><a href="#">Santa Fe</a></li>
+                                        <li><a href="#">Tucson</a></li>
                                          <li><a href="#">Houston</a></li>
                                     </ul>
                                 </li>
