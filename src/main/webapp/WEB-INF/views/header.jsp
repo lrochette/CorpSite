@@ -41,7 +41,7 @@
                                 <li><a href="/jobs">Jobs</a></li>
                                 <li><a href="#">Locations</a>
                                     <ul>
-                                        <li><a href="#">Location 1</a></li>
+                                        <li><a href="#">Paris 1</a></li>
                                         <li><a href="#">Location 2</a></li>
                                         <li><a href="#">Location 3</a></li>
                                     </ul>
