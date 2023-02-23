@@ -42,7 +42,7 @@
                                 <li><a href="#">Locations</a>
                                     <ul>
                                         <li><a href="#">Paris</a></li>
-                                        <li><a href="#">location 2</a></li>
+                                        <li><a href="#">Tucson</a></li>
                                         <li><a href="#">Location 3</a></li>
                                     </ul>
                                 </li>
