@@ -35,13 +35,13 @@
                                 <li><a href="/globex">Home</a></li>
                                 <li><a href="#">About</a>
                                     <ul>
-                                      <li> Version: 1.7.12</li>
+                                      <li> Version: 1.7.13</li>
                                     </ul>
                                 </li>
                                 <li><a href="/jobs">Jobs</a></li>
                                 <li><a href="#">Locations</a>
                                     <ul>
-                                        <li><a href="#">London</a></li>
+                                        <li><a href="#">Phoenix</a></li>
                                         <li><a href="#">Paris</a></li>
                                         <li><a href="#">Tucson</a></li>
 
