@@ -50,6 +50,27 @@ steps:
         cf_export IMAGE_VERSION=$VERSION
         cf_export IMAGE=lrochette/globex:$VERSION
 
+  createCR:
+    type: service-now:${{VERSION}}
+    title: Create Service Now Change Request
+    stage: build
+    arguments:
+      CR_ACTION: createCR
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      TOKEN: ${{CF_TOKEN}}
+      CR_CONFLICT_POLICY: ignore
+      CR_DATA: >-
+        {
+          "short_description": "Application deployment to Prod",
+          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
+          "justification": "I do not need a justification\nMy app is awesome",
+          "cmdb_ci":"tomcat",
+        "start_date":${{START_DATE}},
+        "end_date":${{END_DATE}}
+        }
+
   build_image:
     title: "Building tomcat container"
     type: build
@@ -86,7 +107,7 @@ steps:
     stage: dev
     type: git-commit
     arguments:
-      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+      repo: ${{CF_REPO_OWNER}}/csdp_applications
       git: github
       working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/dev"
       commit_message: "update image to ${{IMAGE_VERSION}}"
@@ -97,26 +118,6 @@ steps:
       add:
         - deployment.yaml
 
-  createCR:
-    type: service-now:${{VERSION}}
-    title: Create Service Now Change Request
-    stage: prod
-    arguments:
-      CR_ACTION: createCR
-      SN_USER: admin
-      SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
-      TOKEN: ${{CF_TOKEN}}
-      CR_CONFLICT_POLICY: ignore
-      CR_DATA: >-
-        {
-          "short_description": "Application deployment to Prod",
-          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
-          "justification": "I do not need a justification\nMy app is awesome",
-          "cmdb_ci":"tomcat",
-        "start_date":${{START_DATE}},
-        "end_date":${{END_DATE}}
-        }
 
   approval:
     stage: prod
@@ -154,7 +155,7 @@ steps:
     stage: prod
     type: git-commit
     arguments:
-      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+      repo: ${{CF_REPO_OWNER}}/csdp_applications
       git: github
       working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/dev"
       commit_message: "update image to ${{IMAGE_VERSION}}"
