@@ -2,19 +2,33 @@ version: '1.0'
 stages:
   - clone
   - build
-  - test
-  - push
-  - deploy
-
+  - dev
+  - prod
+  - post
 
 steps:
 
-  clone:
-    title: Cloning repository
-    type: git-clone
-    repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
-    revision: ${{CF_REVISION}}
+  init:
+    type: parallel
     stage: clone
+    steps:
+      clone:
+        title: Cloning repository
+        type: git-clone
+        git: github
+        repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}
+        revision: ${{CF_REVISION}}
+        stage: clone
+
+      calculateDate:
+        image: ubuntu:latest
+        stage: prod
+        commands:
+          - |
+            START_DATE=`date -u '+%Y-%m-%d %H:%M:%S'`
+            END_DATE=`date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S'`
+            echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+            echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
   build_application:
     title: "Building Globex website"
@@ -23,75 +37,165 @@ steps:
     tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
     commands:
       - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
-    stage: "build"
-
-  test:
-    title: "Running test"
-    image: maven:3.3-jdk-8
-    working_directory: "${{clone}}"
-    commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository test
-    stage: "test"
-
-  build_image:
-    title: "Building tomcat container"
-    type: "build"
-    image_name: "lrochette/globex"
-    working_directory: "${{clone}}"
-    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
-    dockerfile: "Dockerfile"
-    disable_push: true
-    stage: "build"
+    stage: build
 
   getVersion:
     title: "Get the image version from the repo"
     image: codefresh/cli
     working_directory: "${{clone}}"
-    stage: "push"
+    stage: build
     commands:
       - |
         export VERSION=$(cat version.txt | tr -d '\n')
         cf_export IMAGE_VERSION=$VERSION
         cf_export IMAGE=lrochette/globex:$VERSION
 
-  push:
-    type: push
-    title: "Pushing globex image"
-    candidate: ${{build_image}}
+  build_image:
+    title: "Building tomcat container"
+    type: build
     image_name: "lrochette/globex"
-    tag: ${{IMAGE_VERSION}}
-    registry: docker-lr
-    stage: "push"
+    working_directory: "${{clone}}"
+    tags:
+      - "${{CF_BRANCH_TAG_NORMALIZED}}"
+      - ${{IMAGE_VERSION}}
+    dockerfile: "Dockerfile"
+    disable_push: false
+    stage: build
 
 
-  cloneArgo:
+  clone_dev:
     title: Cloning Gitops repository
     type: git-clone
     git: github
-    repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+    repo: ${{CF_REPO_OWNER}}/csdp_applications
     revision: main
-    stage: deploy
+    stage: dev
 
-  updateVersion:
+  updateVersion_dev:
     title: update the version of the image
-    stage: deploy
+    stage: dev
     image: codefresh/cli
-    working_directory: "${{CF_REPO_NAME}}_gitops"
+    working_directory: "${{clone_dev}}/kustomize/globex/overlays/dev"
     commands:
       - ls
       - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
 
-  GitCommit:
+  GitCommit_dev:
     title: Commit new image version to Git
-    stage: deploy
+    stage: dev
     type: git-commit
     arguments:
       repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
       git: github
-      working_directory: "/codefresh/volume/${{CF_REPO_NAME}}_gitops"
+      working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/dev"
       commit_message: "update image to ${{IMAGE_VERSION}}"
       git_user_name: lrochette
       git_user_email: laurent.rochette@codefresh.io
       allow_empty: true
+      rebase: true
       add:
         - deployment.yaml
+
+  createCR:
+    type: service-now:${{VERSION}}
+    title: Create Service Now Change Request
+    stage: prod
+    arguments:
+      CR_ACTION: createCR
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      TOKEN: ${{CF_TOKEN}}
+      CR_CONFLICT_POLICY: ignore
+      CR_DATA: >-
+        {
+          "short_description": "Application deployment to Prod",
+          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
+          "justification": "I do not need a justification\nMy app is awesome",
+          "cmdb_ci":"tomcat",
+        "start_date":${{START_DATE}},
+        "end_date":${{END_DATE}}
+        }
+
+  approval:
+    stage: prod
+    description: "Approval to deploy to PROD"
+    type: pending-approval
+    timeout:
+      duration: 2
+      timeUnit: hours
+      finalState: denied
+
+  modifyCR:
+    stage: prod
+    title: "Modify the implementation plan"
+    type: service-now:${{VERSION}}
+    fail_fast: false
+    arguments:
+      CR_ACTION: updateCR
+      CR_SYSID: ${{CR_SYSID}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      CR_DATA: '{"implementation_plan":"The implementation has been approved."}'
+
+  updateVersion_prod:
+    title: update the version of the image for prod deployment
+    stage: prod
+    image: codefresh/cli
+    working_directory: "${{clone_dev}}/kustomize/globex/overlays/prod"
+    commands:
+      - ls
+      - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
+
+  GitCommit_dev:
+    title: Commit new image version to Git
+    stage: prod
+    type: git-commit
+    arguments:
+      repo: ${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}_gitops
+      git: github
+      working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/dev"
+      commit_message: "update image to ${{IMAGE_VERSION}}"
+      git_user_name: lrochette
+      git_user_email: laurent.rochette@codefresh.io
+      allow_empty: true
+      rebase: true
+      add:
+        - deployment.yaml
+
+  modifyTestPlan:
+    stage: post
+    title: "Modify the test plan"
+    type: service-now:${{VERSION}}
+    fail_fast: false
+    arguments:
+      CR_ACTION: updateCR
+      CR_SYSID: ${{CR_SYSID}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      CR_DATA: '{"test_plan":"The testing suit has passed."}'
+
+  wait2:
+    stage: post
+    title: are we ready to close?
+    type: pending-approval
+    timeout:
+      duration: 10
+      timeUnit: minutes
+      finalState: approved
+
+  closeCR:
+    type: service-now:${{VERSION}}
+    title: Close Service Now Change Request
+    stage: post
+    arguments:
+      CR_ACTION: closeCR
+      CR_SYSID: ${{CR_SYSID}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      CR_CLOSE_CODE: "successful"
+      CR_CLOSE_NOTES: "Closed automatically by Codefresh build ${{CF_BUILD_ID}}"
+      CR_DATA: '{"work_notes":"this is a message for the work notes"}'
