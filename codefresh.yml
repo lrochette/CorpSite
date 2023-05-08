@@ -76,6 +76,7 @@ steps:
   jira:
     type: parallel
     stage: build
+    fail_fast: false
     steps:
       jira-issue-extractor:
         title: Enrich image with annotations

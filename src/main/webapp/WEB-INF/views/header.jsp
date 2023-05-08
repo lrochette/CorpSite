@@ -35,7 +35,7 @@
                                 <li><a href="/globex">Home</a></li>
                                 <li><a href="#">About</a>
                                     <ul>
-                                      <li> Version: 1.7.13</li>
+                                      <li> Version: 1.7.14</li>
                                     </ul>
                                 </li>
                                 <li><a href="/jobs">Jobs</a></li>
@@ -43,7 +43,7 @@
                                     <ul>
                                         <li><a href="#">Phoenix</a></li>
                                         <li><a href="#">Paris</a></li>
-                                        <li><a href="#">Tucson</a></li>
+                                        <li><a href="#">Detroit</a></li>
 
                                     </ul>
                                 </li>
