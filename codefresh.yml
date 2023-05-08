@@ -30,14 +30,7 @@ steps:
             echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
             echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
-  build_application:
-    title: "Building Globex website"
-    image: maven:3.3-jdk-8
-    working_directory: "${{clone}}"
-    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
-    commands:
-      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
-    stage: build
+
 
   getVersion:
     title: "Get the image version from the repo"
@@ -50,27 +43,15 @@ steps:
         cf_export IMAGE_VERSION=$VERSION
         cf_export IMAGE=lrochette/globex:$VERSION
 
-  createCR:
-    type: service-now:${{VERSION}}
-    title: Create Service Now Change Request
+
+  build_application:
+    title: "Building Globex website"
+    image: maven:3.3-jdk-8
+    working_directory: "${{clone}}"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    commands:
+      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
     stage: build
-    arguments:
-      CR_ACTION: createCR
-      DEBUG: true
-      SN_USER: admin
-      SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
-      TOKEN: ${{CF_TOKEN}}
-      CR_CONFLICT_POLICY: ignore
-      CR_DATA: >-
-        {
-          "short_description": "Application deployment to Prod",
-          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
-          "justification": "I do not need a justification\nMy app is awesome",
-          "cmdb_ci":"tomcat",
-        "start_date":${{START_DATE}},
-        "end_date":${{END_DATE}}
-        }
 
   build_image:
     title: "Building tomcat container"
@@ -119,6 +100,28 @@ steps:
       add:
         - deployment.yaml
 
+  createCR:
+    type: service-now:${{VERSION}}
+    title: Create Service Now Change Request
+    stage: prod
+    arguments:
+      CR_ACTION: createCR
+      DEBUG: true
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      TOKEN: ${{CF_TOKEN}}
+      CR_CONFLICT_POLICY: ignore
+      CR_DATA: >-
+        {
+          "short_description": "Application deployment to Prod",
+          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
+          "justification": "I do not need a justification\nMy app is awesome",
+          "cmdb_ci":"tomcat",
+        "start_date":${{START_DATE}},
+        "end_date":${{END_DATE}}
+        }
+
   approval:
     stage: prod
     description: "Approval to deploy to PROD"
@@ -163,6 +166,7 @@ steps:
       git_user_email: laurent.rochette@codefresh.io
       allow_empty: true
       rebase: true
+      force_push: true
       add:
         - deployment.yaml
 
