@@ -56,6 +56,7 @@ steps:
     stage: build
     arguments:
       CR_ACTION: createCR
+      DEBUG: true
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: ${{SN_INSTANCE}}
@@ -117,7 +118,6 @@ steps:
       rebase: true
       add:
         - deployment.yaml
-
 
   approval:
     stage: prod
