@@ -82,7 +82,10 @@ steps:
           IMAGE: 'docker.io/lrochette/globex:${{CF_SHORT_REVISION}}'
           JIRA_PROJECT_PREFIX: 'FT'
           MESSAGE: '${{CF_COMMIT_MESSAGE}}'
-          JIRA_CONTEXT: jira
+          JIRA_API_TOKEN: ${{JIRA_API_KEY}}
+          JIRA_EMAIL: ${{JIRA_USER}}
+          JIRA_HOST: ${{JIRA_URL}}
+          #JIRA_CONTEXT: jira
 
       JiraCommentCreate:
         title: "Add Jira Comment"
