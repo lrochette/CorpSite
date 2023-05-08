@@ -148,7 +148,7 @@ steps:
       - ls
       - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
 
-  GitCommit_dev:
+  GitCommit_prod:
     title: Commit new image version to Git
     stage: prod
     type: git-commit
