@@ -92,9 +92,9 @@ steps:
           JIRA_API_KEY: ${{JIRA_API_KEY}}
           JIRA_BASE_URL: ${{JIRA_URL}}
           JIRA_USERNAME: ${{JIRA_USER}}
-          JIRA_ISSUE_SOURCE_FIELD: 'AP-103'
+          JIRA_ISSUE_SOURCE_FIELD: 'FT-50'
           ACTION: "comment_create"
-          COMMENT_BODY: "BUild to change location in Codefresh build [${{CF_BUILD_ID}}|${{CF_BUILD_URL}}] finished in Codefresh."
+          COMMENT_BODY: "Build to change location in Codefresh build [${{CF_BUILD_ID}}|${{CF_BUILD_URL}}] finished in Codefresh."
 
       enrich-image:
         title: Enrich image with annotations
@@ -222,14 +222,14 @@ steps:
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: ${{SN_INSTANCE}}
-      CR_DATA: '{"test_plan":"The testing suit has passed."}'
+      CR_DATA: '{"test_plan":"The testing suite has passed."}'
 
   wait2:
     stage: post
     title: are we ready to close?
     type: pending-approval
     timeout:
-      duration: 10
+      duration: 30
       timeUnit: minutes
       finalState: approved
 
