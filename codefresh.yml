@@ -73,6 +73,42 @@ steps:
             - sha: ${{CF_SHORT_REVISION}}
             - version: ${{IMAGE_VERSION}}
             display: version
+  jira:
+    type: parallel
+    stage: build
+    steps:
+      jira-issue-extractor:
+        title: Enrich image with annotations
+        type: jira-issue-extractor
+        stage: "build"
+        arguments:
+          IMAGE: 'docker.io/lrochette/globex:${{CF_SHORT_REVISION}}'
+          JIRA_PROJECT_PREFIX: 'FT'
+          MESSAGE: '${{CF_COMMIT_MESSAGE}}'
+          JIRA_CONTEXT: jira
+
+      JiraCommentCreate:
+        title: "Add Jira Comment"
+        type: "jira-issue-manager"
+        fail_fast: false
+        arguments:
+          JIRA_API_KEY: ${{JIRA_API_KEY}}
+          JIRA_BASE_URL: ${{JIRA_URL}}
+          JIRA_USERNAME: ${{JIRA_USER}}
+          JIRA_ISSUE_SOURCE_FIELD: 'AP-103'
+          ACTION: "comment_create"
+          COMMENT_BODY: "BUild to change location in Codefresh build [${{CF_BUILD_ID}}|${{CF_BUILD_URL}}] finished in Codefresh."
+
+      enrich-image:
+        title: Enrich image with annotations
+        type: image-enricher
+        stage: test
+        arguments:
+          IMAGE: 'lrochette/globex:${{CF_SHORT_REVISION}}'
+          BRANCH: '${{CF_BRANCH}}'
+          REPO: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+          GIT_PROVIDER_NAME: github
+
 
   clone_dev:
     title: Cloning Gitops repository
