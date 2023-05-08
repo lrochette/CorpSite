@@ -53,6 +53,7 @@ steps:
   build_image:
     title: "Building tomcat container"
     type: build
+    registry: docker
     image_name: "lrochette/globex"
     working_directory: "${{clone}}"
     tags:
