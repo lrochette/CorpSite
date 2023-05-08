@@ -44,6 +44,7 @@ steps:
         cf_export IMAGE=lrochette/globex:$VERSION
 
 
+
   build_application:
     title: "Building Globex website"
     image: maven:3.3-jdk-8
@@ -65,7 +66,13 @@ steps:
     dockerfile: "Dockerfile"
     disable_push: false
     stage: build
-
+    on_success:
+      annotations:
+        set:
+          - annotations:
+            - sha: ${{CF_SHORT_REVISION}}
+            - version: ${{IMAGE_VERSION}}
+            display: version
 
   clone_dev:
     title: Cloning Gitops repository
@@ -97,6 +104,7 @@ steps:
       git_user_email: laurent.rochette@codefresh.io
       allow_empty: true
       rebase: true
+      force_push: true
       add:
         - deployment.yaml
 
@@ -121,7 +129,11 @@ steps:
         "start_date":${{START_DATE}},
         "end_date":${{END_DATE}}
         }
-
+    on_success:
+      annotations:
+        set:
+          - annotations:
+            - CR: ${{CR_NUMBER}}
   approval:
     stage: prod
     description: "Approval to deploy to PROD"
