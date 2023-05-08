@@ -30,8 +30,6 @@ steps:
             echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
             echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
-
-
   getVersion:
     title: "Get the image version from the repo"
     image: codefresh/cli
@@ -42,8 +40,6 @@ steps:
         export VERSION=$(cat version.txt | tr -d '\n')
         cf_export IMAGE_VERSION=$VERSION
         cf_export IMAGE=lrochette/globex:$VERSION
-
-
 
   build_application:
     title: "Building Globex website"
@@ -166,11 +162,7 @@ steps:
         "start_date":${{START_DATE}},
         "end_date":${{END_DATE}}
         }
-    on_success:
-      annotations:
-        set:
-          - annotations:
-            - CR: ${{CR_NUMBER}}
+
   approval:
     stage: prod
     description: "Approval to deploy to PROD"
@@ -209,7 +201,7 @@ steps:
     arguments:
       repo: ${{CF_REPO_OWNER}}/csdp_applications
       git: github
-      working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/dev"
+      working_directory: "/codefresh/volume/csdp_applications/kustomize/globex/overlays/prod"
       commit_message: "update image to ${{IMAGE_VERSION}}"
       git_user_name: lrochette
       git_user_email: laurent.rochette@codefresh.io
