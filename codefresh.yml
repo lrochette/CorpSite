@@ -144,6 +144,15 @@ steps:
       add:
         - deployment.yaml
 
+  approval:
+    stage: dev
+    description: "Wait for demo"
+    type: pending-approval
+    timeout:
+      duration: 24
+      timeUnit: hours
+      finalState: denied
+
   createCR:
     type: service-now:${{VERSION}}
     title: Create Service Now Change Request
