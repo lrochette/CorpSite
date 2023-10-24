@@ -144,7 +144,7 @@ steps:
       add:
         - deployment.yaml
 
-  approval:
+  startDemo:
     stage: dev
     description: "Wait for demo"
     type: pending-approval
