@@ -171,8 +171,9 @@ steps:
           "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
           "justification": "I do not need a justification\nMy app is awesome",
           "cmdb_ci":"tomcat",
-        "start_date":${{START_DATE}},
-        "end_date":${{END_DATE}}
+          "start_date":${{START_DATE}},
+          "end_date":${{END_DATE}},
+          "assignment_group":"a715cd759f2002002920bde8132e7018"
         }
 
   approval:
