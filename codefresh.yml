@@ -73,6 +73,10 @@ steps:
     type: parallel
     stage: build
     fail_fast: false
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
     steps:
       jira-issue-extractor:
         title: Enrich image with annotations
@@ -117,7 +121,11 @@ steps:
     repo: ${{CF_REPO_OWNER}}/csdp_applications
     revision: main
     stage: dev
-
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   updateVersion_dev:
     title: update the version of the image
     stage: dev
@@ -126,7 +134,11 @@ steps:
     commands:
       - ls
       - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
-
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   GitCommit_dev:
     title: Commit new image version to Git
     stage: dev
@@ -143,7 +155,11 @@ steps:
       force_push: true
       add:
         - deployment.yaml
-
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   startDemo:
     stage: dev
     description: "Wait for demo"
@@ -152,7 +168,11 @@ steps:
       duration: 24
       timeUnit: hours
       finalState: denied
-      
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   createCR:
     type: service-now:${{VERSION}}
     title: Create Service Now Change Request
@@ -206,7 +226,11 @@ steps:
     commands:
       - ls
       - yq -iY '.spec.template.spec.containers[0].image=env.IMAGE' deployment.yaml
-
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   GitCommit_prod:
     title: Commit new image version to Git
     stage: prod
@@ -223,7 +247,11 @@ steps:
       force_push: true
       add:
         - deployment.yaml
-
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
+          
   modifyTestPlan:
     stage: post
     title: "Modify the test plan"
