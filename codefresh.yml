@@ -125,7 +125,7 @@ steps:
       condition:
         all:
           quick: '"${{QUICK}}" != "true"'
-          
+
   updateVersion_dev:
     title: update the version of the image
     stage: dev
@@ -138,7 +138,7 @@ steps:
       condition:
         all:
           quick: '"${{QUICK}}" != "true"'
-          
+
   GitCommit_dev:
     title: Commit new image version to Git
     stage: dev
@@ -159,20 +159,20 @@ steps:
       condition:
         all:
           quick: '"${{QUICK}}" != "true"'
-          
-  startDemo:
-    stage: dev
-    description: "Wait for demo"
-    type: pending-approval
-    timeout:
-      duration: 24
-      timeUnit: hours
-      finalState: denied
-    when:
-      condition:
-        all:
-          quick: '"${{QUICK}}" != "true"'
-          
+
+  # startDemo:
+  #   stage: dev
+  #   description: "Wait for demo"
+  #   type: pending-approval
+  #   timeout:
+  #     duration: 24
+  #     timeUnit: hours
+  #     finalState: denied
+  #   when:
+  #     condition:
+  #       all:
+  #         quick: '"${{QUICK}}" != "true"'
+
   createCR:
     type: service-now:${{VERSION}}
     title: Create Service Now Change Request
@@ -196,14 +196,14 @@ steps:
           "assignment_group":"a715cd759f2002002920bde8132e7018"
         }
 
-  approval:
-    stage: prod
-    description: "Approval to deploy to PROD"
-    type: pending-approval
-    timeout:
-      duration: 2
-      timeUnit: hours
-      finalState: denied
+  # approval:
+  #   stage: prod
+  #   description: "Approval to deploy to PROD"
+  #   type: pending-approval
+  #   timeout:
+  #     duration: 2
+  #     timeUnit: hours
+  #     finalState: denied
 
   modifyCR:
     stage: prod
@@ -230,7 +230,7 @@ steps:
       condition:
         all:
           quick: '"${{QUICK}}" != "true"'
-          
+
   GitCommit_prod:
     title: Commit new image version to Git
     stage: prod
@@ -251,7 +251,7 @@ steps:
       condition:
         all:
           quick: '"${{QUICK}}" != "true"'
-          
+
   modifyTestPlan:
     stage: post
     title: "Modify the test plan"
@@ -265,14 +265,14 @@ steps:
       SN_INSTANCE: ${{SN_INSTANCE}}
       CR_DATA: '{"test_plan":"The testing suite has passed."}'
 
-  wait2:
-    stage: post
-    title: are we ready to close?
-    type: pending-approval
-    timeout:
-      duration: 30
-      timeUnit: minutes
-      finalState: approved
+  # wait2:
+  #   stage: post
+  #   title: are we ready to close?
+  #   type: pending-approval
+  #   timeout:
+  #     duration: 30
+  #     timeUnit: minutes
+  #     finalState: approved
 
   closeCR:
     type: service-now:${{VERSION}}
