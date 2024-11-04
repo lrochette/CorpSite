@@ -160,18 +160,18 @@ steps:
         all:
           quick: '"${{QUICK}}" != "true"'
 
-  # startDemo:
-  #   stage: dev
-  #   description: "Wait for demo"
-  #   type: pending-approval
-  #   timeout:
-  #     duration: 24
-  #     timeUnit: hours
-  #     finalState: denied
-  #   when:
-  #     condition:
-  #       all:
-  #         quick: '"${{QUICK}}" != "true"'
+  startDemo:
+    stage: dev
+    description: "Wait for demo"
+    type: pending-approval
+    timeout:
+      duration: 24
+      timeUnit: hours
+      finalState: denied
+    when:
+      condition:
+        all:
+          quick: '"${{QUICK}}" != "true"'
 
   createCR:
     type: service-now:${{VERSION}}
@@ -196,14 +196,14 @@ steps:
           "assignment_group":"a715cd759f2002002920bde8132e7018"
         }
 
-  # approval:
-  #   stage: prod
-  #   description: "Approval to deploy to PROD"
-  #   type: pending-approval
-  #   timeout:
-  #     duration: 2
-  #     timeUnit: hours
-  #     finalState: denied
+  approval:
+    stage: prod
+    description: "Approval to deploy to PROD"
+    type: pending-approval
+    timeout:
+      duration: 2
+      timeUnit: hours
+      finalState: denied
 
   modifyCR:
     stage: prod
@@ -265,14 +265,14 @@ steps:
       SN_INSTANCE: ${{SN_INSTANCE}}
       CR_DATA: '{"test_plan":"The testing suite has passed."}'
 
-  # wait2:
-  #   stage: post
-  #   title: are we ready to close?
-  #   type: pending-approval
-  #   timeout:
-  #     duration: 30
-  #     timeUnit: minutes
-  #     finalState: approved
+  wait2:
+    stage: post
+    title: are we ready to close?
+    type: pending-approval
+    timeout:
+      duration: 30
+      timeUnit: minutes
+      finalState: approved
 
   closeCR:
     type: service-now:${{VERSION}}
