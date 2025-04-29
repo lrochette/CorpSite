@@ -174,7 +174,7 @@ steps:
           quick: '"${{QUICK}}" != "true"'
 
   createCR:
-    type: service-now:${{VERSION}}
+    type: service-now:${{SN_VERSION}}
     title: Create Service Now Change Request
     stage: prod
     arguments:
@@ -208,7 +208,7 @@ steps:
   modifyCR:
     stage: prod
     title: "Modify the implementation plan"
-    type: service-now:${{VERSION}}
+    type: service-now:${{SN_VERSION}}
     fail_fast: false
     arguments:
       CR_ACTION: updateCR
@@ -255,7 +255,7 @@ steps:
   modifyTestPlan:
     stage: post
     title: "Modify the test plan"
-    type: service-now:${{VERSION}}
+    type: service-now:${{SN_VERSION}}
     fail_fast: false
     arguments:
       CR_ACTION: updateCR
@@ -275,7 +275,7 @@ steps:
       finalState: approved
 
   closeCR:
-    type: service-now:${{VERSION}}
+    type: service-now:${{SN_VERSION}}
     title: Close Service Now Change Request
     stage: post
     arguments:
