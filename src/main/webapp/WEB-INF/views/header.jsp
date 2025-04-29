@@ -42,7 +42,7 @@
                                 <li><a href="#">Locations</a>
                                     <ul>
                                         <li><a href="#">Seattle</a></li>
-                                        <li><a href="#">Lyon</a></li>
+                                        <li><a href="#">Tucson</a></li>
                                         <li><a href="#">Detroit</a></li>
 
                                     </ul>
