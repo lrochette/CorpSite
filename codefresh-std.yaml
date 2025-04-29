@@ -46,7 +46,8 @@ steps:
           "justification": "I do not need a justification\nMy app is awesome",
           "cmdb_ci":"tomcat",
           "start_date":${{START_DATE}},
-          "end_date":${{END_DATE}}
+          "end_date":${{END_DATE}},
+           "assignment_group": "679434f053231300e321ddeeff7b12d8"
         }
 
   schedule:
