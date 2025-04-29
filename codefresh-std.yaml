@@ -123,7 +123,7 @@ steps:
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: '${{SN_INSTANCE}}'
-      CR_DATA: '{"test_plan":"The testing suit has passed."}'
+      CR_DATA: '{"work_notes":"The testing suit has passed."}'
 
   closeCR:
     type: service-now:${{VERSION}}
@@ -137,4 +137,4 @@ steps:
       SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_CLOSE_CODE: "successful"
       CR_CLOSE_NOTES: "Closed automatically by Codefresh build ${{CF_BUILD_ID}}"
-      CR_DATA: '{"work_notes":"this is a message for the work notes"}'
+      CR_DATA: '{"work_notes":"this is a last message upon closure"}'
