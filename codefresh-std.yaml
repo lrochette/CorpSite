@@ -49,7 +49,7 @@ steps:
 
   schedule:
     title: "schedule"
-    type: ${{ACCOUNT}}service-now:${{VERSION}}
+    type: service-now:${{VERSION}}
     fail_fast: false
     arguments:
       CR_ACTION: updateCR
@@ -69,7 +69,7 @@ steps:
             display: CR
 
   implement:
-    type: ${{ACCOUNT}}service-now:${{VERSION}}
+    type: service-now:${{VERSION}}
     stage: "deploy"
     fail_fast: false
     arguments:
@@ -100,7 +100,7 @@ steps:
       - sleep 10
 
   review:
-    type: ${{ACCOUNT}}service-now:${{VERSION}}
+    type: service-now:${{VERSION}}
     stage: "test"
     fail_fast: false
     arguments:
