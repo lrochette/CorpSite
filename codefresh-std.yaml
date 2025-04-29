@@ -1,7 +1,6 @@
 version: "1.0"
 
 stages:
-  - "clone"
   - "build"
   - deploy
   - "test"
@@ -25,10 +24,10 @@ steps:
         END_DATE=`date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S'`
         echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
         echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
-        
+
   createCR:
     type: service-now:${{VERSION}}
-    title: Create Service Now Change Request
+    title: Create ServiceNow Standard Change Request
     stage: deploy
     arguments:
       CR_ACTION: createCR
@@ -37,36 +36,52 @@ steps:
       SN_INSTANCE: ${{SN_INSTANCE}}
       TOKEN: ${{CF_TOKEN}}
       CR_CONFLICT_POLICY: ignore
+      STD_CR_TEMPLATE: "Reboot Windows Server"
       CR_DATA: >-
         {
-          "short_description": "Application deployment to Prod", 
-          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin", 
-          "justification": "I do not need a justification\nMy app is awesome", 
+          "short_description": "Application deployment to Prod",
+          "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
+          "justification": "I do not need a justification\nMy app is awesome",
           "cmdb_ci":"tomcat",
-        "start_date":${{START_DATE}},
-        "end_date":${{END_DATE}}
+          "start_date":${{START_DATE}},
+          "end_date":${{END_DATE}}
         }
 
-  approval:
-    stage: deploy
-    description: "Approval to deploy to PROD"
-    type: pending-approval
-    timeout:
-      duration: 2
-      finalState: denied    
-
-  modifyCR:
-    stage: deploy
-    title: "Modify the implementation plan"
-    type: service-now:${{VERSION}}
+  schedule:
+    title: "schedule"
+    type: ${{ACCOUNT}}service-now:${{VERSION}}
     fail_fast: false
     arguments:
       CR_ACTION: updateCR
       CR_SYSID: ${{CR_SYSID}}
+      CR_NUMBER: ${{CR_NUMBER}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: ${{SN_INSTANCE}}
-      CR_DATA: '{"implementation_plan":"The implementation has been approved."}' 
+      SN_IMAGE: ${{IMAGE}}
+      SN_IMAGE_VERSION: ${{VERSION}}
+      CR_DATA: '{"state":"-2","implementation_plan":"The implementation has been approved."}'
+    on_success:
+      annotations:
+        set:
+          - annotations:
+            - CR: ${{CR_NUMBER}}
+            display: CR
+
+  implement:
+    type: ${{ACCOUNT}}service-now:${{VERSION}}
+    stage: "deploy"
+    fail_fast: false
+    arguments:
+      CR_ACTION: updateCR
+      CR_SYSID: ${{CR_SYSID}}
+      CR_NUMBER: ${{CR_NUMBER}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      SN_IMAGE: ${{IMAGE}}
+      SN_IMAGE_VERSION: ${{VERSION}}
+      CR_DATA: '{"state":"-1"}'
 
   deploy:
     title: "Deploying App"
@@ -74,7 +89,7 @@ steps:
     stage: "deploy"
     commands:
       - echo "Deploying App"
-      - sleep 5
+      - sleep 1
 
   test:
     title: "Testing App"
@@ -83,6 +98,21 @@ steps:
     commands:
       - echo "Testing App"
       - sleep 10
+
+  review:
+    type: ${{ACCOUNT}}service-now:${{VERSION}}
+    stage: "test"
+    fail_fast: false
+    arguments:
+      CR_ACTION: updateCR
+      CR_SYSID: ${{CR_SYSID}}
+      CR_NUMBER: ${{CR_NUMBER}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: ${{SN_INSTANCE}}
+      SN_IMAGE: ${{IMAGE}}
+      SN_IMAGE_VERSION: ${{VERSION}}
+      CR_DATA: '{"state":"0"}'
 
   modifyTestPlan:
     stage: test
@@ -96,15 +126,7 @@ steps:
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: ${{SN_INSTANCE}}
       CR_DATA: '{"test_plan":"The testing suit has passed."}'
-  wait2:
-    stage: post
-    title: are we ready to close?
-    type: pending-approval
-    timeout:
-      duration: 10
-      timeUnit: minutes
-      finalState: approved  
-      
+
   closeCR:
     type: service-now:${{VERSION}}
     title: Close Service Now Change Request
