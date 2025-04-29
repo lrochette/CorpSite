@@ -123,7 +123,7 @@ steps:
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: '${{SN_INSTANCE}}'
-      CR_DATA: '{"work_notes":"The testing suit has passed."}'
+      CR_DATA: '{"work_notes":"The testing suite has passed."}'
 
   closeCR:
     type: service-now:${{VERSION}}
