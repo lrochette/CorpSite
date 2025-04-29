@@ -1,3 +1,6 @@
+#
+# Standard Change does NOT require approval
+#
 version: "1.0"
 
 stages:
