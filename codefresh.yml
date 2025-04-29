@@ -279,7 +279,7 @@ steps:
   #     finalState: approved
 
   review:
-    type: service-now:${{VERSION}}
+    type: service-now:${{SN_VERSION}}
     stage: "test"
     fail_fast: false
     arguments:
