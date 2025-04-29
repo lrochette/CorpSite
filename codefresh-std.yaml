@@ -8,22 +8,24 @@ stages:
 
 steps:
 
-  build:
-    title: "Building App"
-    image: "codefresh/cli"
-    stage: "build"
-    commands:
-      - echo "Building App"
+  parallel:
+    type: parallel
+    stage: build
+    steps:
+      build:
+        title: "Building App"
+        image: "codefresh/cli"
+        commands:
+          - echo "Building App"
 
-  calculateDate:
-    image: ubuntu:latest
-    stage: deploy
-    commands:
-      - |
-        START_DATE=`date -u '+%Y-%m-%d %H:%M:%S'`
-        END_DATE=`date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S'`
-        echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
-        echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+      calculateDate:
+        image: ubuntu:latest
+        commands:
+          - |
+            START_DATE=`date -u '+%Y-%m-%d %H:%M:%S'`
+            END_DATE=`date -u -d '+1 day' '+%Y-%m-%d %H:%M:%S'`
+            echo START_DATE=\"$START_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+            echo  END_DATE=\"$END_DATE\" >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
   createCR:
     type: service-now:${{VERSION}}
@@ -50,6 +52,7 @@ steps:
   schedule:
     title: "schedule"
     type: service-now:${{VERSION}}
+    stage: "deploy"
     fail_fast: false
     arguments:
       CR_ACTION: updateCR
@@ -57,9 +60,7 @@ steps:
       CR_NUMBER: ${{CR_NUMBER}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
-      SN_IMAGE: ${{IMAGE}}
-      SN_IMAGE_VERSION: ${{VERSION}}
+      SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_DATA: '{"state":"-2","implementation_plan":"The implementation has been approved."}'
     on_success:
       annotations:
@@ -78,9 +79,7 @@ steps:
       CR_NUMBER: ${{CR_NUMBER}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
-      SN_IMAGE: ${{IMAGE}}
-      SN_IMAGE_VERSION: ${{VERSION}}
+      SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_DATA: '{"state":"-1"}'
 
   deploy:
@@ -109,9 +108,7 @@ steps:
       CR_NUMBER: ${{CR_NUMBER}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
-      SN_IMAGE: ${{IMAGE}}
-      SN_IMAGE_VERSION: ${{VERSION}}
+      SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_DATA: '{"state":"0"}'
 
   modifyTestPlan:
@@ -124,7 +121,7 @@ steps:
       CR_SYSID: ${{CR_SYSID}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
+      SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_DATA: '{"test_plan":"The testing suit has passed."}'
 
   closeCR:
@@ -136,7 +133,7 @@ steps:
       CR_SYSID: ${{CR_SYSID}}
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
-      SN_INSTANCE: ${{SN_INSTANCE}}
+      SN_INSTANCE: '${{SN_INSTANCE}}'
       CR_CLOSE_CODE: "successful"
       CR_CLOSE_NOTES: "Closed automatically by Codefresh build ${{CF_BUILD_ID}}"
       CR_DATA: '{"work_notes":"this is a message for the work notes"}'
