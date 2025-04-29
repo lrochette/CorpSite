@@ -62,7 +62,7 @@ steps:
       SN_USER: admin
       SN_PASSWORD: '${{SN_PASSWORD}}'
       SN_INSTANCE: '${{SN_INSTANCE}}'
-      CR_DATA: '{"state":"-2","implementation_plan":"The implementation has been approved."}'
+      CR_DATA: '{"state":"-2"}'
     on_success:
       annotations:
         set:
