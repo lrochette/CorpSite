@@ -269,14 +269,27 @@ steps:
       SN_INSTANCE: ${{SN_INSTANCE}}
       CR_DATA: '{"test_plan":"The testing suite has passed."}'
 
-  wait2:
-    stage: post
-    title: are we ready to close?
-    type: pending-approval
-    timeout:
-      duration: 30
-      timeUnit: minutes
-      finalState: approved
+  # wait2:
+  #   stage: post
+  #   title: are we ready to close?
+  #   type: pending-approval
+  #   timeout:
+  #     duration: 30
+  #     timeUnit: minutes
+  #     finalState: approved
+
+  review:
+    type: service-now:${{VERSION}}
+    stage: "test"
+    fail_fast: false
+    arguments:
+      CR_ACTION: updateCR
+      CR_SYSID: ${{CR_SYSID}}
+      CR_NUMBER: ${{CR_NUMBER}}
+      SN_USER: admin
+      SN_PASSWORD: '${{SN_PASSWORD}}'
+      SN_INSTANCE: '${{SN_INSTANCE}}'
+      CR_DATA: '{"state":"0"}'
 
   closeCR:
     type: service-now:${{SN_VERSION}}
