@@ -41,7 +41,7 @@ steps:
       SN_INSTANCE: ${{SN_INSTANCE}}
       TOKEN: ${{CF_TOKEN}}
       CR_CONFLICT_POLICY: ignore
-      STD_CR_TEMPLATE: "Reboot Windows Server"
+      STD_CR_TEMPLATE: "Application deployment"
       CR_DATA: >-
         {
           "short_description": "Application deployment to Prod",
