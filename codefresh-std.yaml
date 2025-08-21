@@ -44,7 +44,7 @@ steps:
       STD_CR_TEMPLATE: "Application deployment"
       CR_DATA: >-
         {
-          "short_description": "Application deployment to Prod",
+          "short_description": "Pre-approved Application deployment",
           "description": "Change for build ${{CF_BUILD_ID}}\nThis change was created by the Codefresh plugin",
           "justification": "I do not need a justification\nMy app is awesome",
           "cmdb_ci":"tomcat",
