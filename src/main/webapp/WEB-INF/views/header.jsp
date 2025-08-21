@@ -43,7 +43,7 @@
                                     <ul>
                                         <li><a href="#">Seattle</a></li>
                                         <li><a href="#">Tucson</a></li>
-                                        <li><a href="#">Detroit</a></li>
+                                        <li><a href="#">Paris</a></li>
 
                                     </ul>
                                 </li>
