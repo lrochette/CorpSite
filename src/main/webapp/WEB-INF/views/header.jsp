@@ -41,7 +41,7 @@
                                 <li><a href="/jobs">Jobs</a></li>
                                 <li><a href="#">Locations</a>
                                     <ul>
-                                        <li><a href="#">Portland</a></li>
+                                        <li><a href="#">Phoenix</a></li>
                                         <li><a href="#">Tucson</a></li>
                                         <li><a href="#">Paris</a></li>
 
