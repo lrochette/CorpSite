@@ -20,7 +20,6 @@ hooks:
           SLACK_MESSAGE: "Build for Snow Standard Change failed. See ${{CF_BUILD_URL}}"
 
 steps:
-
   parallel:
     type: parallel
     stage: build
