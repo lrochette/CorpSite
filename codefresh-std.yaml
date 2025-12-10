@@ -9,8 +9,17 @@ stages:
   - "test"
   - post
 
-steps:
+hooks:
+  on_fail:
+    steps:
+      exec:
+        type: slack-post-channel:0.0.7
+        arguments:
+          SLACK_TOKEN: ${{SLACK_TOKEN}}
+          SLACK_CHANNEL: 'laurent.rochette@octopus.com'
+          SLACK_MESSAGE: "Build for Snow Standard Change failed. See ${{CF_BUILD_URL}}"
 
+steps:
   parallel:
     type: parallel
     stage: build
